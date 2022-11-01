@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import { useHttp } from '../../hooks/http.hook';
 
 
@@ -98,9 +100,9 @@ const View = ({areas}) => {
 {/*                     <div className="area__divider"></div>  */}
                     <div className="area__links">                       
                         <MoveMapButton classNames={"button button_small distict__button"} areaId={id}/>                        
-                        <button className="button button_small area__button">
+                        <Link to="/postamats" className="button button_small area__button">
                             Перейти
-                        </button>     
+                        </Link>     
                     </div>     
                 </div>           
 
@@ -113,10 +115,10 @@ const View = ({areas}) => {
     return(
         <>
             <div className="areas__caption">
-                <a href="#">
+                <Link to="/postamats">
                         <span className="icon-buffer"></span>
                         <span className="text_bold text_color_accent"> Выбрать все районы</span>
-                    </a>
+                    </Link>
                 <div className="areas__total text">
                     {`Всего: ${sum} районов`}
                 </div>

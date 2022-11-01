@@ -1,30 +1,30 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+
 import Header from '../header/Header';
-import Menu from '../menu/Menu';
 
-import MapGL from '../map/MapGL';
+import { DistrictsPage, PostamatsPage } from '../pages';
 
-import Areas from '../areas/Areas';
 import Footer from '../footer/Footer';
-
-/* import Map from '../map/Map'; */
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import '../../style/style.scss'
 
 function App() {
 
   return (
-    <>
+    <Router>
       <Header/>
-      <Menu/>
-      <main>
-        <div className="container main__container">
-
-          <Areas/>
-          <MapGL/> 
-        </div>
-      </main>  
+        <Routes>
+            <Route path="/" element={<DistrictsPage/>}/>
+            <Route path="/postamats" element={<PostamatsPage/>}/>
+            <Route path="*" element={<ErrorMessage />}/> 
+        </Routes>        
       <Footer/>  
-    </>
+    </Router>
 
   );
 }

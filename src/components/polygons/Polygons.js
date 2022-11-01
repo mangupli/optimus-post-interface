@@ -13,16 +13,14 @@ const Polygons = () => {
     if(!mapInstance || !renderedPolygon) return null;
 
     const renderPolygons = (coordinatesArray) => {
-        const elems = coordinatesArray.map(coord => {
+        const elems = coordinatesArray.map((coord, index) => {
             const coordArray = [];
             coordArray.push(coord);
             return (
-            <Polygon coordinates={coordArray} map={mapInstance}/>
+            <Polygon coordinates={coordArray} map={mapInstance} key={index}/>
             )
         });
-        return (
-           elems
-        );
+        return elems;
     }
 
     const renderedElems = renderPolygons(renderedPolygon);
@@ -35,7 +33,7 @@ const Polygons = () => {
 }
 
 const Polygon = ({map, coordinates}) => {
-   
+   // eslint-disable-next-line
     const [polygon, setPolygon] = useState(null);
 
     useEffect(()=>{

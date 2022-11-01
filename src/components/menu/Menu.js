@@ -1,6 +1,8 @@
 import { useEffect, useContext, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import {useHttp} from '../../hooks/http.hook';
 import { MapContext } from "../../contexts/MapContext";
 
@@ -81,10 +83,10 @@ const Menu = () => {
     return(
         <nav className="menu">
             <div className="container">
-                <a href="#">
+                <Link to="/postamats">
                     <span className="icon-buffer"></span>
                     <span className="text_bold text_color_accent"> Выбрать все округа</span>
-                </a>
+                </Link>
                 <div className="menu__wrapper">
                     {elems}
                 </div>
