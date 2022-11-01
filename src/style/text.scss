@@ -1,0 +1,24 @@
+@import "./variables.scss";
+
+.text{
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #333333;
+    &_bold{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #000000;
+    }
+    &_color_accent{
+        color: var(--main-color);
+    }
+}
+
+
+.title{
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--main-color);
+}

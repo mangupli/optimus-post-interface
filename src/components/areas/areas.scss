@@ -1,0 +1,110 @@
+@import "../../style/variables.scss";
+
+.areas{
+    &__overflow{
+        margin-top: 10px;
+        overflow: auto;
+        height: 500px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+        box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    &__wrapper{
+        display: grid;
+        max-width: 618px;
+        grid-auto-flow: row;
+        grid-template-columns: 1fr;
+        row-gap: 40px;
+
+    }
+    &__caption{
+        display: flex;
+        align-items : end;
+        justify-content: space-between;
+        padding-right: 20px;
+    }
+
+}
+
+.areas__overflow::-webkit-scrollbar {
+    width: 4px;
+}
+
+.areas__overflow::-webkit-scrollbar-track {
+    background: white;
+}
+
+.areas__overflow::-webkit-scrollbar-thumb{
+    background-color:  #333333; 
+    border-radius: 20px;
+}
+
+.area{
+    background: white;
+    padding: 22px 25px 22px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
+
+    display: grid;
+    grid-template-areas: 
+       "header header results"
+       "header header results"
+       "links links results";
+        
+    &__header{
+        grid-area: header;
+        display: flex;
+    }
+
+    &__emblem img{
+        width: 85px;
+        height: 104px;
+    }
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+        margin-left: 25px;
+    }
+
+    &__title{
+        margin-top: 5px;
+    }
+
+    &__square{
+        margin-top: 5px;
+    }
+    &__results{
+        height: 100%;
+        grid-area: results;
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        border-left: var(--bg-color) 3px solid;
+        padding-left: 22px;
+        gap: 15px;
+        justify-content: center;
+    }
+    &__result{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    &__divider{
+        height: 3px;
+        width: 100%;
+        background-color: var(--bg-color);
+        margin-top: 25px;
+    }
+    &__links{
+        grid-area: links;
+        margin-top: 17px;
+        display: flex;
+/*         justify-content: end;
+        align-self: end; */
+    }
+    &__button{
+        margin-left: 24px;
+    }
+}

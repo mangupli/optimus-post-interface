@@ -1,0 +1,45 @@
+@import "../../style/variables.scss";
+
+.menu{
+    padding-top: 40px;
+    &__wrapper{
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        grid-template-rows: repeat(2, minmax(55px, auto));
+    }
+
+    &__name{
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        color: var(--main-color);
+    }
+    
+    &__descr{
+        text-align: center;
+        font-size: 14px;
+        display: none;
+        transition: 0.5s all;
+    }
+ 
+}
+
+.menu__button:hover > .menu__name{
+    display: none;  
+}
+
+.menu__button:hover > .menu__descr{
+        display: block;  
+}
+
+.menu__button_active > .menu__name {
+    color: white;
+}
+
+.menu__button_active:hover > .menu__descr{
+    color: white;
+}
+
+/* или можно когда выбранный — только чтобы было полное название: */
