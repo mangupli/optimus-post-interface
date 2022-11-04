@@ -6,7 +6,7 @@
     box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
     border-radius: 10px;
     margin-bottom: 50px;
-
+    cursor: pointer;
     &__header{
         display: block;
     }
@@ -16,5 +16,8 @@
         margin-top: 25px;
         padding-top: 15px;
         border-top: 3px var(--bg-color) solid;
+    }
+    &:hover{
+        outline: 3px solid var(--border-color);
     }
 }

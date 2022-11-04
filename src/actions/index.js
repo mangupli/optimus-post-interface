@@ -1,10 +1,21 @@
-import {useContext} from 'react';
-import { MapContext } from "../contexts/MapContext";
-
 export const activeDistrictChanged = (id) => {
     return {
         type: 'ACTIVE_DISTRICT_CHANGED',
         payload: id
+    }
+}
+
+export const activeAreaChanged = (id) => {
+    return {
+        type: 'ACTIVE_AREA_CHANGED',
+        payload: id
+    }
+}
+
+export const updateActiveAreaInfo= (areaObj) => {
+    return {
+        type: 'UPDATE_ACTIVE_AREA_INFO',
+        payload: areaObj
     }
 }
 
@@ -29,6 +40,15 @@ export const updateRenderedPolygon = (polygon) => {
     }
 }
 
+export const markersFetched = (coords) => {
+    const markers = coords.map(coord => {
+        return {coordinates: coord}
+    });
+    return{
+        type: 'MARKERS_FETCHED',
+        payload: markers
+    }
+}
 
 export const districtsFetched = (districts) => {
     return {
@@ -37,13 +57,13 @@ export const districtsFetched = (districts) => {
     }
 }
 
-export const updateActiveDistrict = (districts, districtId) => {
+/* export const updateActiveDistrict = (districts, districtId) => {
     const district = districts.filter(district => district.id === districtId)[0];
     return {
         type: 'UPDATE_ACTIVE_DISTRICT',
         payload: district
     }
-}
+} */
 
 export const areasLoading = () => {
     return {

@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { load } from '@2gis/mapgl';
 
-import { MapContext } from "../../contexts/MapContext";
+import { useMapContext } from '../../contexts/MapContext';
 
 const Polygons = () => {
-    const [mapInstance] = useContext(MapContext);
+    const [mapInstance] = useMapContext();
 
     const renderedPolygon = useSelector(state => state.renderedPolygon);
 

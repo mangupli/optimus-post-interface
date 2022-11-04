@@ -8,7 +8,7 @@ import "./areas.scss"
 const Areas = () => {
 
     const activeDistrictId = useSelector(state => state.activeDistrictId);
-    if (!activeDistrictId){
+    if (!activeDistrictId || activeDistrictId==="all"){
         return (
             <h3 className="text_bold" style={{textAlign: "center"}}>Выберите округ</h3>
         );

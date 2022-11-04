@@ -1,10 +1,13 @@
-import MapGL from '../map/MapGL';
+import MainMap from "../mainMap/MainMap";
+import PostForm from "../postForm/PostForm";
 
 const PostamatsPage = () => {
     return(
-    <div className="container">
-        <MapGL/> 
-      </div>
+      <>
+           <PostForm/>
+
+      </>
+
     );
 }
 

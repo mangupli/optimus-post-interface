@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import './districtInfo.scss'
 
 const DistrictInfo = () => {
@@ -8,9 +10,8 @@ const DistrictInfo = () => {
 
     if(!activeDistrictObj) return;
 
-
     return(
-        <div className="district-card">
+        <Link to="/postamats" className="district-card">
             <div className="title district-card__header">
             {`${activeDistrictObj.name} административный округ`}
             </div>
@@ -48,7 +49,7 @@ const DistrictInfo = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
