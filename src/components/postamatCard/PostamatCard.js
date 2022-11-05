@@ -1,11 +1,10 @@
 import "./postamatCard.scss"
 
-const PostamatCard = () => {
+const PostamatCard = ({postamat}) => {
 	return(
 		<div className="postamat-card">
-			<div>Постамат</div>
-			<div>№1</div>
-			<div>Адрес:</div>
+			<div>id {postamat.id}</div>
+			<div>{postamat.address}</div>
 		</div>
 	);
 }

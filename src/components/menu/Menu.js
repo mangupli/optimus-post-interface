@@ -12,7 +12,7 @@ const Menu = () => {
 
     const {districts, activeDistrictId} = useSelector(state => state);
 
-    const {pickAndShowDistrict, pickAndUpdateDistrict} = useRequestService();
+    const { pickAndShowDistrict } = useRequestService();
 
     const onClick = (id) => {
         pickAndShowDistrict(id);
@@ -45,7 +45,8 @@ const Menu = () => {
     return(
         <nav className="menu">
             <div className="container">
-                <Link to="/postamats" onClick={() => pickAndUpdateDistrict('all')}>
+                <Link to="/postamats" onClick={() => pickAndShowDistrict('all')
+                }>
                     <span className="icon-buffer"></span>
                     <span className="text_bold text_color_accent"> Выбрать все округа</span>
                 </Link>

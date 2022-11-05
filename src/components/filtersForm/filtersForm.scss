@@ -1,7 +1,15 @@
 .filters{
-	margin-top: 50px;
+	margin-top: 25px;
 	display: flex;
 	justify-content: space-between;
+	align-items: end;
+	
+	&__item{
+		max-width: 178px;		
+	}
+	&__label{
+		margin-bottom: 5px;
+	}
 }
 
 .filter{
@@ -26,6 +34,5 @@
 .postamats{
 	&__button{
 		display: block;
-		margin: 25px auto;
 	}
 }

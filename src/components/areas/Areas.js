@@ -18,7 +18,7 @@ const Areas = () => {
             <DistrictInfo/>
             <AreasList/>
         </div>
-    );
+    )
 }
 
 export default Areas;

@@ -12,7 +12,7 @@ export const activeAreaChanged = (id) => {
     }
 }
 
-export const updateActiveAreaInfo= (areaObj) => {
+export const updateActiveAreaInfo = (areaObj) => {
     return {
         type: 'UPDATE_ACTIVE_AREA_INFO',
         payload: areaObj
@@ -81,5 +81,99 @@ export const areasFetched = (areas) => {
 export const areasFetchingError = () => {
     return {
         type: 'AREAS_FETCHING_ERROR'
+    }
+}
+
+export const setLocationOptions = (locationOptions) => {
+    const allOption = {value: 'all', label: 'Все'};
+    return {
+        type: 'SET_LOCATION_OPTIONS',
+        payload: [allOption, ...locationOptions]
+    }
+}
+
+
+export const postamatsLoading = () => {
+    return {
+        type: 'POSTAMATS_LOADING'
+    }
+}
+
+export const postamatsFetched = (postamats) => {
+    return {
+        type: 'POSTAMATS_FETCHED',
+        payload: postamats
+    }
+}
+
+export const postamatsFetchingError = () => {
+    return {
+        type: 'POSTAMATS_FECTHING_ERROR'
+    }
+}
+
+export const sumbitFilters = (filtersObj) => {
+
+    let filters = undefined;
+
+    if(filtersObj){
+        filters = {};
+
+        filters.area_id = filtersObj.areaFilter.value;
+        if(filters.area_id === 'all')
+            filters.area_id = null;
+    
+        filters.district_id = filtersObj.districtFilter.value;
+        if(filters.district_id === 'all')
+            filters.district_id = null;
+    
+        switch(filtersObj.sortFilter.value){
+            case('predict'):
+                filters.sort = `-${filtersObj.methodFilter.value}`;
+                break;
+            case('distance_to_metro'):
+                filters.sort = 'distance_to_metro';
+                break;
+            case('people_in_range'):
+                filters.sort = '-people_in_range';
+                break;
+            default:
+                filters.sort='-predict_a';
+        }
+    
+        filters.predict = filtersObj.methodFilter.value;
+    
+        if(filtersObj.postamatTypeFilter === "" || filtersObj.postamatTypeFilter.value === "all"){
+            filters.is_placed = null;
+        }
+        else{
+            filters.is_placed = filtersObj.postamatTypeFilter.value;
+        }
+    
+        if(filtersObj.locationFilter === "" || filtersObj.locationFilter.value === "all"){
+            filters.placement_object_type_id = null;
+        }
+        else{
+            filters.placement_object_type_id = filtersObj.locationFilter.value;
+        }
+    
+        switch(filtersObj.sortFilter.value){
+            case('predict'):
+                filters.sort = `-${filtersObj.methodFilter.value}`;
+                break;
+            case('distance_to_metro'):
+                filters.sort = 'distance_to_metro';
+                break;
+            case('people_in_range'):
+                filters.sort = '-people_in_range';
+                break;
+            default:
+                filters.sort='-predict_a';
+        }
+    }
+
+    return{
+        type: 'SUBMIT_FILTERS',
+        payload: filters
     }
 }

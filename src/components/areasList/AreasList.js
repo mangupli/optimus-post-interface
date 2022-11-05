@@ -9,8 +9,6 @@ import MoveMapButton from '../moveMapButton/MoveMapButton';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
 
-import emblem from '../../assets/images/emblem1.png'
-
 const AreasList = () => {
 
 	const areas = useSelector(state => state.areas);
@@ -21,6 +19,7 @@ const AreasList = () => {
 
 	useEffect(() =>{
 		pickAndShowDistrict(activeDistrictId);
+		// eslint-disable-next-line 
 	},[]);
 
 	useEffect(()=>{
@@ -37,13 +36,12 @@ const AreasList = () => {
 	const errorMessage = (areasLoadingStatus === "error") ?  <ErrorMessage/> : null;
 	const content = (areasLoadingStatus === "idle")  ? <View areas={areas} onClick={onClick}/> : null;
 
-	return(
+	return (
 		<>
 			{errorMessage}
 			{spinner}
 			{content}        
 		</>
-
 	)
 }
 
@@ -51,12 +49,12 @@ const View = ({areas, onClick}) => {
 
 	const renderAreas = (areas) => {
 		return areas.map(area => {
-			const {name, population, square, id} = area;
+			const {name, population, square, id, emblem_url, automatic_post_office_stats : post_office} = area;
 			return (
 				<div className="area" key={id}>
 					<div className="area__header">
 						<div className="area__emblem">
-							<img src={emblem} alt="Emblem" />
+							<img src={emblem_url} alt="Герб" />
 						</div>
 						<div className="area__info">
 							<div className="area__population text">
@@ -76,23 +74,23 @@ const View = ({areas, onClick}) => {
 									Постаматов
 								</div>
 								<div className="text_bold">
-									140
+									{post_office.placed}
 								</div>
 							</div>
-							<div className="area__result">
+{							<div className="area__result">
 								<div className="text">
 									Постаматов
 								</div>
 								<div className="text_bold">
-									140
+									{post_office.placed}
 								</div>
-							</div>
+							</div>}
 							<div className="area__result">
 								<div className="text">
 									Мест свободно
 								</div>
 								<div className="text_bold">
-									1000
+								{post_office.not_placed}
 								</div>
 							</div>
 						</div> 

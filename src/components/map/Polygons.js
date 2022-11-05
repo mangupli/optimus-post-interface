@@ -37,7 +37,7 @@ const Polygon = ({map, coordinates}) => {
     const [polygon, setPolygon] = useState(null);
 
     useEffect(()=>{
-/*         if(!map || !coordinates) return; */
+/*      if(!map || !coordinates) return; */
 
         let instance;
         

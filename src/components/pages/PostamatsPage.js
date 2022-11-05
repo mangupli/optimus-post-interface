@@ -1,11 +1,13 @@
-import MainMap from "../mainMap/MainMap";
-import PostForm from "../postForm/PostForm";
+import FiltersForm from "../filtersForm/FiltersForm";
+import MainMapWrapper from "../mainMap/MainMap";
+import Postamats from "../postamats/Postamats";
 
 const PostamatsPage = () => {
     return(
       <>
-           <PostForm/>
-
+            <FiltersForm />
+            <MainMapWrapper /> 
+            <Postamats/>
       </>
 
     );

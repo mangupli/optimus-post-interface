@@ -18,11 +18,10 @@ const MainMap = () => {
         // moving 2gis copyright mark so it won't be in the way
         mapInstance.setControlsLayoutPadding({
             right: hidden ? 0 : 80
-        });
-        
+        });     
     }
 
-    const mapClass = classNames('container', 'map_big',{
+    const mapClass = classNames('map_big',{
         'map_hidden': hidden
     });
 

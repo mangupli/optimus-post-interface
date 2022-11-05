@@ -10,10 +10,12 @@ const DistrictInfo = () => {
 
     if(!activeDistrictObj) return;
 
+    const {name, square, population, automatic_post_office_stats : post_office} = activeDistrictObj;
+
     return(
         <Link to="/postamats" className="district-card">
             <div className="title district-card__header">
-            {`${activeDistrictObj.name} административный округ`}
+            {`${name} административный округ`}
             </div>
             <div className="district-card__info">
                 <div className="district-card__info-item">
@@ -21,7 +23,7 @@ const DistrictInfo = () => {
                         Площадь
                     </div>
                     <div className="text_bold">
-                    {`${activeDistrictObj.square} км²`}
+                    {`${square} км²`}
                     </div>
                 </div>
                 <div className="district-card__info-item">
@@ -29,7 +31,7 @@ const DistrictInfo = () => {
                         Население
                     </div>
                     <div className="text_bold">
-                    {`${activeDistrictObj.population}`}
+                    {`${population}`}
                     </div>
                 </div>
                 <div className="district-card__info-item">
@@ -37,15 +39,15 @@ const DistrictInfo = () => {
                         Постаматов
                     </div>
                     <div className="text_bold">
-                        1000
+                    {post_office.placed}
                     </div>
                 </div>
                 <div className="district-card__info-item">
                     <div className="text">
-                        Постаматов
+                          Прогноз
                     </div>
                     <div className="text_bold">
-                        1000
+                    {post_office.not_placed}
                     </div>
                 </div>
             </div>

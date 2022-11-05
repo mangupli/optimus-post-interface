@@ -4,22 +4,27 @@ const initialState = {
 	districts: [],
 	activeDistrictId: undefined,
 	activeDistrictInfo: undefined,
-	activeDistrictFilter: undefined,
+	activeDistrictFilter: {value: 'all', label: 'Все округа'},
 	districtOptions: [],
 	
-
 	//areas filters
 	areasLoadingStatus: 'idle',
 	areas: [],
 	activeAreaId: undefined,
 	activeAreaInfo: undefined,
-	activeAreaFilter: undefined,
+	activeAreaFilter: {value: 'all', label: 'Все районы'},
 	areaOptions: [],
 	numberOfAreas: 0,
 	mapCenter: [37.624716, 55.750965],
 	renderedPolygon: undefined,
 		
 	renderedMarkers: [],
+
+	//sublmitted filters
+	filters: undefined,
+
+	//other filters
+	locationOptions: [],
 	
 	//postamats
 	postamats: [],
@@ -34,8 +39,7 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				activeDistrictId: action.payload,
-				activeDistrictFilter: state.districtOptions.filter(districtOption => districtOption.value === action.payload),
-				
+				activeDistrictFilter: state.districtOptions.filter(districtOption => districtOption.value === action.payload),				
 			}
 		}
 		case 'ACTIVE_AREA_CHANGED':{
@@ -114,6 +118,34 @@ const reducer = (state = initialState, action) => {
 				...state,
 				areasLoadingStatus: 'error'
 			}
+		case 'SET_LOCATION_OPTIONS':
+			return{
+				...state,
+				locationOptions: action.payload
+			}
+
+		case 'POSTAMATS_LOADING':
+			return{
+				...state,
+				postamatsLoadingStatus: 'loading'
+			}
+		case 'POSTAMATS_FETCHED':
+			return{
+				...state,
+				postamatsLoadingStatus: 'idle',
+				postamats: action.payload
+			}
+		case 'POSTAMATS_FETCHING_ERROR':
+			return{
+				...state,
+				postamatsLoadingStatus: 'error'
+			}
+		case 'SUBMIT_FILTERS':
+			return{
+				...state,
+				filters: action.payload
+			}
+			
 		default:{
 			return state;
 		}

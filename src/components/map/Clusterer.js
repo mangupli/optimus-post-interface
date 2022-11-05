@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Clusterer } from '@2gis/mapgl-clusterer';
 
 import { useMapContext } from '../../contexts/MapContext';
+import { useCallback } from 'react';
 
 
 const ClustererBase = () => {
@@ -13,13 +14,21 @@ const ClustererBase = () => {
 
     const [clustererInstance, setClustererInstance] = useState(null);
 
+    const eventHandler = useCallback((event) => {
+      console.log(event.target);
+        console.log(`is clicked`);
+    }, []);
+
     //загружаем кластер
     useEffect(() => {
         if (!clustererInstance) {
           return
-        }
-    
+        }   
         clustererInstance.load(renderedMarkers)
+        clustererInstance.on('click', eventHandler);
+        return(()=>{
+          clustererInstance && clustererInstance.off('click', eventHandler);
+        });
       }, [clustererInstance, renderedMarkers])
 
         // создаем инстанс кластеризации
@@ -39,6 +48,9 @@ const ClustererBase = () => {
       }
     }
   }, [mapInstance])
+
+  
+
 
     return null;
 }

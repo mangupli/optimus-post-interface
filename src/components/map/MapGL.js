@@ -4,17 +4,19 @@ import { MapContext } from '../../contexts/MapContext';
 
 import { load } from '@2gis/mapgl';
 
+import Polygons from './Polygons';
+import ClustererBase from './Clusterer';
+import Source from './Source';
+
 import store from '../../store';
-import Polygons from '../polygons/Polygons';
-import ClustererBase from '../clusterer/Clusterer';
 
 import './map.scss';
 
 export const MapGL = () => {
     // eslint-disable-next-line
     const [_, setMapInstance] = useContext(MapContext);
-    
-    const  mapCenter = store.getState().mapCenter;
+
+    const mapCenter = store.getState().mapCenter;
 
     useEffect(() => {
         let map;
@@ -27,15 +29,14 @@ export const MapGL = () => {
                 zoomControl: 'bottomLeft',
             });
 
-
             map.on('click', (e) => {
                 if (!e.target) {
                     return;
                 }
                 const { id } = e.target;
                 console.log('Идентификатор объекта: ' + id);
-            });            
-
+            });    
+            
             setMapInstance(map); 
         });
 
@@ -49,16 +50,21 @@ export const MapGL = () => {
 
     return (
         <>
-            <MapWrapper />
-            <Polygons/>
-            <ClustererBase/>
+            <MapWrapper>
+{/*                 <Polygons/> */}
+                <Source purpose={'areas-outline'} id={'polygons-layer'} />
+                <ClustererBase/>
+            </MapWrapper>
+            
         </>
     );
 };
 
 const MapWrapper = memo(
-    () => {
-        return <div id="map-container"></div>;
+    ({children}) => {
+        return (<div id="map-container">
+            {children}
+        </div>);
     },
     () => true,
 );
