@@ -5,40 +5,44 @@ import { useMapContext } from '../../contexts/MapContext';
 
 import { load } from '@2gis/mapgl';
 
-const Source = (props) => {
+const MarkersSource = ({id, purpose}) => {
+
     const [ mapInstance ] = useMapContext();
 
-    const renderedPolygon = useSelector(state => state.renderedPolygon);
+    const postamats = useSelector(state => state.postamats);
 
     const [source, setSource] = useState(null);
 
     useEffect(() => {
-    if (mapInstance && renderedPolygon) {
+    if (mapInstance && postamats) {
 
         let instance;
 
         const data = {
             type: 'FeatureCollection',
-            features: renderedPolygon.map(polygon => ({
+            features: postamats.map(postamat => ({
                     type: 'Feature',
                     //custom propertie, helps with events
                     properties: {
-                        type: 'area',
-                        name: 'outline'
+                        type: 'marker',
+                        label: postamat.id,
+                        color: 'blue',
+                        name: `Moscow Postamat №${postamat.id}`
                     },
                     geometry: {
-                        type: 'Polygon',
-                        coordinates: [polygon],                        
-                    }
+                        type: 'Point',
+                        coordinates: postamat.geo_data,
+                    },
                 }))
         }
 
         load().then(mapglAPI => {
+
             instance = new mapglAPI.GeoJsonSource(mapInstance, {
                 data,
                 //should be unique to connet data source and layer
                 attributes: {
-                    purpose: 'areas-outline',
+                    purpose: purpose,
                 },
             });
 
@@ -46,20 +50,19 @@ const Source = (props) => {
 
         }) 
         return () => {
-            console.log('remove source');
             instance && instance.destroy();            
         };
     }
     return undefined;
-    }, [mapInstance, renderedPolygon]);
+    }, [mapInstance, postamats]);
 
 /*     return null; */
 
         return( 
         <Layer
             map={mapInstance}
-            id={props.id}
-            purpose={props.purpose}
+            id={id}
+            purpose={purpose}
             source={source}
             />
         )
@@ -76,13 +79,19 @@ const Layer = (props) => {
         filter: ['match', ['sourceAttr', 'purpose'], [purpose], true, false],
     
         // Тип объекта отрисовки
-        type: 'polygon',
+        type: 'point',
     
         // Стиль объекта отрисовки
         style: {
-            strokeWidth: 2,
-            strokeColor: '#2A5CDC',
-            color: 'rgba(0,0,0,0)'
+            iconImage: ['match', ['get', 'color'], ['blue'], 'ent_i', 'ent'],
+            iconWidth: 25,
+            textField: ['get', 'label'],
+            textFont: ['Noto_Sans'],
+            textColor: '#0098ea',
+            textHaloColor: '#fff',
+            textHaloWidth: 1,
+            iconPriority: 100,
+            textPriority: 100,
         },
     });
 
@@ -117,4 +126,4 @@ const Layer = (props) => {
     return null;
 }
 
-export default Source;
+export default MarkersSource;

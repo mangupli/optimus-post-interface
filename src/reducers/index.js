@@ -31,6 +31,9 @@ const initialState = {
 	postamatsLoadingStatus: 'idle',
 	filteredPostamats: [],
 
+	//heatmap
+	heatmap: false
+
 }
 
 const reducer = (state = initialState, action) => {
@@ -145,6 +148,12 @@ const reducer = (state = initialState, action) => {
 				...state,
 				filters: action.payload
 			}
+		case 'SWITCH_HEATMAP':{
+			return {
+				...state,
+				heatmap: !state.heatmap,				
+			}
+		}
 			
 		default:{
 			return state;

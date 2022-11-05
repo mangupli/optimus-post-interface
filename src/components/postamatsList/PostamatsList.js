@@ -26,11 +26,9 @@ const PostamatsList = ({filters}) => {
 
     return(
         <div className='postamats-list'>                   
-            <div className='container'>
                 {errorMessage}
                 {spinner}
                 {content}        
-            </div>
         </div>
     )
 }

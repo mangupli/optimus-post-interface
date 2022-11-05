@@ -6,8 +6,10 @@ const PostamatsPage = () => {
     return(
       <>
             <FiltersForm />
-            <MainMapWrapper /> 
-            <Postamats/>
+            <div className="container">
+              <MainMapWrapper /> 
+              <Postamats/>
+            </div>
       </>
 
     );

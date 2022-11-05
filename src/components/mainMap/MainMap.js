@@ -1,9 +1,12 @@
 import { useState, memo } from "react";
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
 import MapGL from "../map/MapGL";
 
 import { useMapContext } from '../../contexts/MapContext';
+
+import { switchHeatmap } from '../../actions/'
 
 import "./mainMap.scss"
 
@@ -12,6 +15,8 @@ const MainMap = () => {
     const [hidden, setHidden] = useState(false);
 
     const [mapInstance] = useMapContext();
+
+    const dispatch = useDispatch();
 
     const rollMap = () => {
         setHidden(prevState => !prevState);
@@ -31,6 +36,11 @@ const MainMap = () => {
                 <MapGL/>
                 <div className="map__control">
                     <div className="text_bold text_color_white map__title">Карта</div>
+                    <label className="toggle">
+                        <input type="checkbox" onClick={()=>dispatch(switchHeatmap())}/>
+                        <span className="slider"></span>
+                        <span className="labels" data-on="Тепловая" data-off="Обычная"></span>
+                    </label>
                     <div onClick={rollMap} className="map__roll-up">
                         <i className="icon-arrowDown"></i>
                     </div>

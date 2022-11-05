@@ -108,7 +108,7 @@ export const postamatsFetched = (postamats) => {
 
 export const postamatsFetchingError = () => {
     return {
-        type: 'POSTAMATS_FECTHING_ERROR'
+        type: 'POSTAMATS_FETCHING_ERROR'
     }
 }
 
@@ -141,7 +141,7 @@ export const sumbitFilters = (filtersObj) => {
                 filters.sort='-predict_a';
         }
     
-        filters.predict = filtersObj.methodFilter.value;
+/*         filters.predict = filtersObj.methodFilter.value; */
     
         if(filtersObj.postamatTypeFilter === "" || filtersObj.postamatTypeFilter.value === "all"){
             filters.is_placed = null;
@@ -176,4 +176,11 @@ export const sumbitFilters = (filtersObj) => {
         type: 'SUBMIT_FILTERS',
         payload: filters
     }
+}
+
+export const switchHeatmap = () => {
+    return{
+        type: 'SWITCH_HEATMAP',
+    }
+
 }

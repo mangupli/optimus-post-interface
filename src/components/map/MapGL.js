@@ -4,9 +4,10 @@ import { MapContext } from '../../contexts/MapContext';
 
 import { load } from '@2gis/mapgl';
 
-import Polygons from './Polygons';
 import ClustererBase from './Clusterer';
-import Source from './Source';
+import PolygonSource from './PolygonSource';
+import MarkersSource from './MarkersSource';
+import HeatMapSource from './HeatMapSource';
 
 import store from '../../store';
 
@@ -51,9 +52,11 @@ export const MapGL = () => {
     return (
         <>
             <MapWrapper>
-{/*                 <Polygons/> */}
-                <Source purpose={'areas-outline'} id={'polygons-layer'} />
-                <ClustererBase/>
+                <PolygonSource purpose={'areas-outline'} id={'polygons-layer'} />
+{/*                 <MarkersSource purpose={'postamats-markers'} id={'markers-layer'}/> */}
+                <HeatMapSource purpose={'heatmap'} id={'heatmap-layer'}/>
+
+{/*                 <ClustererBase/> */}
             </MapWrapper>
             
         </>

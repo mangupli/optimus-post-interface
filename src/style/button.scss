@@ -14,13 +14,14 @@
     transition: 0.5s all;
     cursor: pointer;
     background-color: inherit;
-    background-color: white;
+/*     background-color: white; */
     &_small{
         width: 178px;
         height: 52px;        
         font-weight: 600;
         font-size: 18px;
         line-height: 22px;
+        background-color: inherit;
     }
     &_xs{
         width: 160px;
@@ -28,6 +29,7 @@
         font-weight: 600;
         font-size: 18px;
         line-height: 22px;
+        background-color: inherit;
     }
     &_active{
         background-color: var(--main-color);

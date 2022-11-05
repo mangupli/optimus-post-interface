@@ -7,9 +7,7 @@ import Select from 'react-select';
 
 import { methodOptions, postamatTypeOptions, sortOptions } from '../../constants';
 
-import PostamatCard from "../postamatCard/PostamatCard";
-
-import {sumbitFilters} from '../../actions'
+import {sumbitFilters, postamatsFetched} from '../../actions'
 
 import './filtersForm.scss';
 
@@ -47,12 +45,17 @@ const FiltersForm = () => {
 		setFieldValue("areaFilter", option);
 	}
 
-	console.log('render form');
+/* 	console.log('render form'); */
 
 	const setFilters = (values) => {
 		console.log(JSON.stringify(values, null, 2))
 		dispatch(sumbitFilters(values));
+	}
 
+	const onFilterChange = (id, option, setFieldValue) => {
+		setFieldValue(id, option);
+		dispatch(sumbitFilters(undefined));
+		dispatch(postamatsFetched([]));
 	}
 
 	return(
@@ -113,9 +116,7 @@ const FiltersForm = () => {
 										placeholder={'Выбрать'}
 										id="sortFilter"
 										value={values.sortFilter}
-										onChange={option => {
-											setFieldValue("sortFilter", option)
-											dispatch(sumbitFilters(undefined))}}
+										onChange={option => onFilterChange("sortFilter", option, setFieldValue)}
 										options={sortOptions}
 										onBlur={handleBlur}
 									/>
@@ -126,9 +127,7 @@ const FiltersForm = () => {
 									placeholder={'Выбрать'}
 									id="locationFilter"
 									value={values.locationFilter}
-									onChange={option => {
-										setFieldValue("locationFilter", option)
-										dispatch(sumbitFilters(undefined))}}
+									onChange={option => onFilterChange("locationFilter", option, setFieldValue)}
 									options={locationOptions}
 									onBlur={handleBlur}
 									/>
@@ -139,9 +138,7 @@ const FiltersForm = () => {
 									placeholder={'Выбрать'}
 									id="methodFilter"
 									value={values.methodFilter}
-									onChange={option => {
-										setFieldValue("methodFilter", option)
-										dispatch(sumbitFilters(undefined))}}
+									onChange={option => onFilterChange("methodFilter", option, setFieldValue)}
 									options={methodOptions}
 									onBlur={handleBlur}
 									/>
@@ -153,9 +150,7 @@ const FiltersForm = () => {
 									placeholder={'Выбрать'}
 									id="postamatTypeFilter"
 									value={values.postamatTypeFilter}
-									onChange={option => {
-										setFieldValue("postamatTypeFilter", option)
-										dispatch(sumbitFilters(undefined))}}
+									onChange={option => onFilterChange("postamatTypeFilter", option, setFieldValue)}
 									options={postamatTypeOptions}
 									onBlur={handleBlur}
 									/>
