@@ -8,8 +8,9 @@ const PostamatsPage = () => {
             <FiltersForm />
             <div className="container">
               <MainMap /> 
-              <Postamats/>
             </div>
+              <Postamats/>
+
       </>
 
     );

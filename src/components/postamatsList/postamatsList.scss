@@ -25,4 +25,45 @@
         right: 55px;
         top: 32px;
     }
+    &__overflow{
+        overflow: auto;
+        max-height: 580px;
+        box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
+        padding: 5px;
+    }
+    &__panel{
+        padding: 24px;
+        width: 100%;
+        background: white;
+        box-shadow: 0px -6px 31px rgba(0, 0, 0, 0.1);
+        &-wrapper{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            align-items: center;
+        }
+    }
+    &__total{
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 20px;
+        color: #21201F;
+    }
+    &__buttons{
+        display: flex;
+        justify-content: space-between;
+        align-self: start;
+    }
+}
+
+.postamats-list__overflow::-webkit-scrollbar {
+    width: 4px;
+}
+
+.postamats-list__overflow::-webkit-scrollbar-track {
+    background: white;
+}
+
+.postamats-list__overflow::-webkit-scrollbar-thumb{
+    background-color:  #333333; 
+    border-radius: 20px;
 }

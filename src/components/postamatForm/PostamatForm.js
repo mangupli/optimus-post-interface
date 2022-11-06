@@ -1,11 +1,19 @@
+import { useState } from 'react';
+
 import { useFormik } from 'formik';
-import { createRoutesFromChildren } from 'react-router-dom';
+
+import { useRequestService } from '../../services/RequestService';
 
 import PostamatCard from '../postamatCard/PostamatCard';
 
 const PostamatForm = (props) =>{
 
     const {postamats} = props;
+
+    const [chosenItems, setChosenItems] = useState(0);
+
+    const { exportPostamats } = useRequestService();
+
 
     const init = {};
 
@@ -21,14 +29,20 @@ const PostamatForm = (props) =>{
         onSubmit: values => {
    
           console.log(JSON.stringify(values, null, 2));
-   
+          
         },
    
       });
 
       const changeField = (e) => {
         formik.handleChange(e);
-/*         formik.setFieldValue('e.target.id', true); */
+
+        if(e.target.checked){
+          setChosenItems(prev => prev + 1)
+        }
+        else{
+          setChosenItems(prev => prev - 1)
+        }
         console.log(e.target);
       }
 
@@ -42,7 +56,7 @@ const PostamatForm = (props) =>{
                     type="checkbox"
                     onChange={e=>changeField(e)}
                     onBlur={formik.handleBlur}
-                    value={formik.values.id}
+                    value={formik.values[id]}
                     className="postamats-list__input"
                     />
                  <PostamatCard postamat={postamat} choosen={formik.values[id]}/>
@@ -53,10 +67,26 @@ const PostamatForm = (props) =>{
  
       return (
         <>           
-          <form onSubmit={formik.handleSubmit} className="postamats-list__wrapper">
-              {items}			
-            <button type="submit" className='button button_small'>Выбрать</button>   
-            <button type="button" className='button button_small'>Карта (pdf)</button>  
+          <form onSubmit={formik.handleSubmit}>
+            <div className="container">
+              <div className="postamats-list__overflow">
+                <div className="postamats-list__wrapper">
+                  {items}
+                </div>           
+              </div>
+            </div>
+            <div className="postamats-list__panel">
+              <div className="container">
+                <div className="postamats-list__panel-wrapper">
+                  <div className="postamats-list__total">{`Выбрано ${chosenItems} постаматов`}</div>
+                  <div className="postamats-list__buttons">
+                    <button type="submit" className='button_form'>Постаматы (excel)</button>   
+                    <button type="button" className='button_form'>Карта (pdf)</button>  
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </form>         
         </>
 

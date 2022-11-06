@@ -34,18 +34,25 @@ const PostamatsList = ({filters}) => {
 
     return(
         <>
-        <div className="postamats-list__title">Рекомендованные постаматы</div>
-        <div className='postamats-list'>                   
-                {errorMessage}
-                {spinner}
-                {predict}        
-        </div>
-        <div className="postamats-list__title">Установленные постаматы</div>
-         <div className='postamats-list'>   
-            <div className='postamats-list__wrapper'>                 
-                {oldPostamatsCards}        
+            <div className="container">
+                <div className="postamats-list__title">Рекомендованные постаматы</div>
             </div>
-        </div>
+            
+            <div className='postamats-list'>                   
+                    {errorMessage}
+                    {spinner}
+                    {predict}        
+            </div>
+
+            <div className="container">
+            <div className="postamats-list__title">Установленные постаматы</div>
+                <div className='postamats-list'>   
+                    <div className='postamats-list__wrapper'>                 
+                        {oldPostamatsCards}        
+                    </div>
+                </div>
+            </div>
+
         </>
     )
 }

@@ -131,8 +131,8 @@ export const useRequestService = () => {
         dispatch(postamatsLoading())
 
         const body = {
-            page: 1,
-            per_page: 10,
+/*             page: 1,
+            per_page: 10, */
             ...filters    
         }
 
@@ -149,5 +149,20 @@ export const useRequestService = () => {
 
     } , [])
 
-    return { pickAndShowDistrict, loadAreas, pickAndUpdateDistrict, pickArea, pickAndShowArea, loadLocations, loadPostamats };
+    const exportPostamats = useCallback((filters) => {
+ 
+        const body = {
+/*             ids: chosenPostamats, */
+                ...filters    
+            }
+        
+        request(`${api_base}/automatic_post_offices/export_xlsx`, 'POST', JSON.stringify(body))
+		.then(data => {
+            console.log('export');
+            console.log(data);
+		})
+		.catch(() => dispatch(postamatsFetchingError()));
+    }, []);
+
+    return { pickAndShowDistrict, loadAreas, pickAndUpdateDistrict, pickArea, pickAndShowArea, loadLocations, loadPostamats, exportPostamats };
 }

@@ -16,9 +16,7 @@ const initialState = {
 	areaOptions: [],
 	numberOfAreas: 0,
 	mapCenter: [37.624716, 55.750965],
-	renderedPolygon: undefined,
-		
-	renderedMarkers: [],
+	renderedPolygon: undefined,		
 
 	//sublmitted filters
 	filters: undefined,
@@ -34,7 +32,10 @@ const initialState = {
 	chosenPostamats: [],
 
 	//heatmap
-	heatmap: false
+	heatmap: false,
+
+	//form
+	chosenItems: 0
 
 }
 
