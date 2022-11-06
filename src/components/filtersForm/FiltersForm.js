@@ -69,8 +69,7 @@ const FiltersForm = () => {
 				methodFilter: {
 					"value": "predict_a",
 					"label": "Модель А"
-				  },
-/* 				postamatTypeFilter: '' */
+				  }
 			}}
 			onSubmit={values => setFilters(values)}
 			>

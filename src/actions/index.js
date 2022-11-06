@@ -162,15 +162,6 @@ export const sumbitFilters = (filtersObj) => {
                 filters.sort='-predict_a';
         }
     
-/*         filters.predict = filtersObj.methodFilter.value; */
-    
-/*         if(filtersObj.postamatTypeFilter === "" || filtersObj.postamatTypeFilter.value === "all"){
-            filters.is_placed = null;
-        }
-        else{
-            filters.is_placed = filtersObj.postamatTypeFilter.value;
-        } */
-    
         if(filtersObj.locationFilter === "" || filtersObj.locationFilter.value === "all"){
             filters.placement_object_type_id = null;
         }
