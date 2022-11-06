@@ -4,7 +4,7 @@ import { useMapContext } from "../contexts/MapContext";
 
 import { cityCenter } from '../constants';
 
-import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats } from '../actions/'
+import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats } from '../actions/';
 import { useCallback } from 'react';
 
 export const useRequestService = () => {
@@ -34,6 +34,8 @@ export const useRequestService = () => {
                 // when you change active area or district — you need to reset filters and postamats
                 dispatch(sumbitFilters(undefined));
                 dispatch(postamatsFetched([]));
+                dispatch(setOldPostamats([]));
+                dispatch(setNewPostamats([]));
                 return data;
             })
             .then(data=>{
@@ -102,6 +104,8 @@ export const useRequestService = () => {
                  // when you change active area or district — you need to reset filters and postamats
                 dispatch(sumbitFilters(undefined));
                 dispatch(postamatsFetched([]));
+                dispatch(setOldPostamats([]));
+                dispatch(setNewPostamats([]));
                 return data;
             })
             .then(data=>{

@@ -29,13 +29,13 @@ const initialState = {
 	postamatsLoadingStatus: 'idle',
 	oldPostamats: [],
 	newPostamats: [],
-	chosenPostamats: [],
+/* 	chosenPostamats: [], */
 
 	//heatmap
 	heatmap: false,
 
 	//form
-	chosenItems: 0
+	chosenIds: []
 
 }
 
@@ -172,6 +172,11 @@ const reducer = (state = initialState, action) => {
 				heatmap: !state.heatmap,				
 			}
 		}
+		case 'CHOOSE_IDS':
+			return{
+				...state,
+				chosenIds: action.payload
+			}
 			
 		default:{
 			return state;

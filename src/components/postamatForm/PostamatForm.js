@@ -1,7 +1,8 @@
-import { useState, } from 'react';
-import { useSelector } from 'react-redux';
+import { useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useFormik } from 'formik';
+import { chooseIds } from '../../actions';
 
 import { useRequestService } from '../../services/RequestService';
 
@@ -19,6 +20,8 @@ const PostamatForm = (props) => {
     const { exportPostamats } = useRequestService();
 
     const filters = useSelector(state => state.filters);
+
+    const dispatch = useDispatch();
 
 
     const init = {};
@@ -54,7 +57,7 @@ const PostamatForm = (props) => {
       });
 
       const changeHeatMap = (values) => {
-        console.log(values);
+        dispatch(chooseIds(values));
       }
 
       const changeField = (e) => {

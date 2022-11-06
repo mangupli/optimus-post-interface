@@ -7,7 +7,7 @@ import Select from 'react-select';
 
 import { methodOptions, postamatTypeOptions, sortOptions } from '../../constants';
 
-import {sumbitFilters, postamatsFetched} from '../../actions'
+import {sumbitFilters, postamatsFetched, setOldPostamats, setNewPostamats} from '../../actions'
 
 import './filtersForm.scss';
 
@@ -54,6 +54,8 @@ const FiltersForm = () => {
 		setFieldValue(id, option);
 		dispatch(sumbitFilters(undefined));
 		dispatch(postamatsFetched([]));
+		dispatch(setOldPostamats([]));
+		dispatch(setNewPostamats([]));
 	}
 
 	return(

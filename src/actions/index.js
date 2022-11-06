@@ -196,3 +196,18 @@ export const switchHeatmap = () => {
     }
 
 }
+
+export const chooseIds = (values) => {
+    let chosenPostamats = [];
+
+    for(let key in values){
+        if(values[key] === true){
+            chosenPostamats.push(+key);
+        }
+    }
+    return{
+        type: 'CHOOSE_IDS',
+        payload: chosenPostamats
+    }
+
+}
