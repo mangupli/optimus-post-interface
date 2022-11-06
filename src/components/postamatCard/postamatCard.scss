@@ -10,4 +10,7 @@
     & > div{
         width: 300px;
     }
+    &_active{
+        outline: 3px solid var(--border-color);
+    }
 }

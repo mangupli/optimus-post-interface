@@ -1,8 +1,16 @@
 import "./postamatCard.scss"
 
-const PostamatCard = ({postamat}) => {
+import classNames from 'classnames';
+
+const PostamatCard = ({postamat, choosen}) => {
+	if(!postamat) return <h5>Карточка постамата, которого не существует</h5>
+
+	const cardClass = classNames('postamat-card', {
+		'postamat-card_active': choosen
+	});
+
 	return(
-		<div className="postamat-card">
+		<div className={cardClass}>
 			<div>
 				<div> Постамат №{postamat.id}</div>
 				<div>{postamat.address}</div>

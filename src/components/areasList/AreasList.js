@@ -54,7 +54,7 @@ const View = ({areas, onClick}) => {
 				<div className="area" key={id}>
 					<div className="area__header">
 						<div className="area__emblem">
-							<img src={emblem_url} alt="Герб" />
+							<Emblem src={emblem_url}/>
 						</div>
 						<div className="area__info">
 							<div className="area__population text">
@@ -126,6 +126,18 @@ const View = ({areas, onClick}) => {
 				</div> 
 			</div>
 		</>)
+}
+
+const Emblem = ({src}) => {
+
+	let image = <img src={src} alt="Герб" />;
+
+ 	if(src.substring(src.length - 3) === 'svg'){
+		/*что-то сделать  чтобы грузилась svg*/
+	} 
+	
+	return image;
+
 }
 
 export default AreasList;

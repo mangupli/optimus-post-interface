@@ -46,7 +46,7 @@ const MainMapComponent = (props) => {
                 <div className="map__control">
                     <div className="text_bold text_color_white map__title">Карта</div>
                     <label className="toggle">
-                        <input type="checkbox" onClick={()=>dispatch(switchHeatmap())}/>
+                        <input type="checkbox" onClick={()=>dispatch(switchHeatmap())} defaultChecked={heatmap}/>
                         <span className="slider"></span>
                         <span className="labels" data-on="Тепловая" data-off="Обычная"></span>
                     </label>
