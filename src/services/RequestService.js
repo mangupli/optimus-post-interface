@@ -6,6 +6,8 @@ import { cityCenter } from '../constants';
 
 import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats } from '../actions/'
 import { useCallback } from 'react';
+import fileSaver from "file-saver/dist/FileSaver";
+import FileDownload from "js-file-download";
 
 export const useRequestService = () => {
 
@@ -164,10 +166,17 @@ export const useRequestService = () => {
                 ...filters    
             }
         
-        request(`${api_base}/automatic_post_offices/export_xlsx`, 'POST', JSON.stringify(body))
-		.then(data => {
-            console.log(data);
-		})
+        fetch(`${api_base}/automatic_post_offices/export_xlsx`,{method:  'POST', body: JSON.stringify(body),headers: { 'Content-Type': 'application/octet-stream'}})
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "Постаматы.xlsx";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            })
 		.catch(e => console.log(e))
     };
 
