@@ -6,8 +6,6 @@ import { cityCenter } from '../constants';
 
 import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats } from '../actions/'
 import { useCallback } from 'react';
-import fileSaver from "file-saver/dist/FileSaver";
-import FileDownload from "js-file-download";
 
 export const useRequestService = () => {
 
