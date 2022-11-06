@@ -4,7 +4,7 @@ import { useMapContext } from "../contexts/MapContext";
 
 import { cityCenter } from '../constants';
 
-import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon, markersFetched, areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats, setChosenPostamats } from '../actions/'
+import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats } from '../actions/'
 import { useCallback } from 'react';
 
 export const useRequestService = () => {
@@ -149,20 +149,27 @@ export const useRequestService = () => {
 
     } , [])
 
-    const exportPostamats = useCallback((filters) => {
- 
+    const exportPostamats = (filters, values) => {
+
+        let chosenPostamats = [];
+
+        for(let key in values){
+            if(values[key] === true){
+                chosenPostamats.push(+key);
+            }
+        }
+
         const body = {
-/*             ids: chosenPostamats, */
+                ids: chosenPostamats,
                 ...filters    
             }
         
         request(`${api_base}/automatic_post_offices/export_xlsx`, 'POST', JSON.stringify(body))
 		.then(data => {
-            console.log('export');
             console.log(data);
 		})
-		.catch(() => dispatch(postamatsFetchingError()));
-    }, []);
+		.catch(e => console.log(e))
+    };
 
     return { pickAndShowDistrict, loadAreas, pickAndUpdateDistrict, pickArea, pickAndShowArea, loadLocations, loadPostamats, exportPostamats };
 }

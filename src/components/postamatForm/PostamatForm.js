@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, } from 'react';
+import { useSelector } from 'react-redux';
 
 import { useFormik } from 'formik';
 
@@ -6,13 +7,15 @@ import { useRequestService } from '../../services/RequestService';
 
 import PostamatCard from '../postamatCard/PostamatCard';
 
-const PostamatForm = (props) =>{
+const PostamatForm = (props) => {
 
     const {postamats} = props;
 
     const [chosenItems, setChosenItems] = useState(0);
 
     const { exportPostamats } = useRequestService();
+
+    const filters = useSelector(state => state.filters);
 
 
     const init = {};
@@ -29,6 +32,7 @@ const PostamatForm = (props) =>{
         onSubmit: values => {
    
           console.log(JSON.stringify(values, null, 2));
+          exportPostamats(filters, values);
           
         },
    
@@ -40,7 +44,7 @@ const PostamatForm = (props) =>{
         if(e.target.checked){
           setChosenItems(prev => prev + 1)
         }
-        else{
+        else {
           setChosenItems(prev => prev - 1)
         }
         console.log(e.target);
