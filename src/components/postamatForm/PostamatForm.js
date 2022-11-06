@@ -5,17 +5,34 @@ import { useFormik } from 'formik';
 import { useRequestService } from '../../services/RequestService';
 
 import PostamatCard from '../postamatCard/PostamatCard';
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const PostamatForm = (props) =>{
 
     const {postamats} = props;
 
     const [chosenItems, setChosenItems] = useState(0);
+    const [disabledToPdf, setDisabledToPdf] = useState(false)
 
     const { exportPostamats } = useRequestService();
 
 
     const init = {};
+
+    const toPdf = () => {
+        setDisabledToPdf(true)
+        const element = document.getElementsByTagName('canvas')[0];
+        html2canvas(element)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: "landscape"
+                });
+                pdf.addImage(imgData, 'JPEG', 0, 0);
+                pdf.save("map.pdf");
+            }).finally(() => setDisabledToPdf(false))
+    }
 
     postamats.forEach(postamat => {
         const id = postamat.id;
@@ -81,7 +98,7 @@ const PostamatForm = (props) =>{
                   <div className="postamats-list__total">{`Выбрано ${chosenItems} постаматов`}</div>
                   <div className="postamats-list__buttons">
                     <button type="submit" className='button_form'>Постаматы (excel)</button>   
-                    <button type="button" className='button_form'>Карта (pdf)</button>  
+                    <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf}>Карта (pdf)</button>
                   </div>
 
                 </div>

@@ -49,6 +49,9 @@
         &:active{
             background-color: var(--border-color);
         }
+        &:disabled {
+            background-color: var(--skeleton-color);
+        }
     }
 
     &_active{
