@@ -46,11 +46,10 @@ const PostamatForm = (props) => {
 
         initialValues: init,
    
-        onSubmit: values => {
-   
-          console.log(JSON.stringify(values, null, 2));
-          exportPostamats(filters, values);
-          
+        onSubmit: (values, action) => {
+            action.setSubmitting(true)
+            exportPostamats(filters, values);
+            action.setSubmitting(false)
         },
    
       });
@@ -101,8 +100,8 @@ const PostamatForm = (props) => {
                 <div className="postamats-list__panel-wrapper">
                   <div className="postamats-list__total">{`Выбрано ${chosenItems} постаматов`}</div>
                   <div className="postamats-list__buttons">
-                    <button type="submit" className='button_form'>Постаматы (excel)</button>   
-                    <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf}>Карта (pdf)</button>
+                    <button type="submit" className='button_form' disabled={formik.isSubmitting}>Постаматы (excel)</button>
+                    <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf || formik.isSubmitting}>Карта (pdf)</button>
                   </div>
 
                 </div>
