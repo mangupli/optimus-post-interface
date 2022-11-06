@@ -27,6 +27,7 @@ export const MapGLComponent = (props) => {
                 zoom: 11,
                 key: 'a21a56b9-9f9b-4092-b8a5-b281a67a958a',
                 zoomControl: 'bottomLeft',
+                preserveDrawingBuffer: true
             });
 
             map.on('click', (e) => {
