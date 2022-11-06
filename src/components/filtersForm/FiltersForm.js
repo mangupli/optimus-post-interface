@@ -29,9 +29,7 @@ const FiltersForm = () => {
 	}, []);
 
 	//to show on the map while changing filters
-	const  onChangeDistrictFilter = (option, setFieldValue) => {
-		dispatch(sumbitFilters(undefined));
-		dispatch(postamatsFetched([]));
+	const  onChangeDistrictFilter = (option, setFieldValue) => {;
 		const districtId = option.value;
 		pickAndShowDistrict(districtId);
 		loadAreas(districtId);
@@ -41,8 +39,6 @@ const FiltersForm = () => {
 
 	const  onChangeAreaFilter = (option, setFieldValue) => {
 		const areaId = option.value;
-		dispatch(postamatsFetched([]));
-		dispatch(sumbitFilters(undefined));
 		pickAndShowArea(areaId);
 		setFieldValue("areaFilter", option);
 	}
@@ -74,7 +70,7 @@ const FiltersForm = () => {
 					"value": "predict_a",
 					"label": "Модель А"
 				  },
-				postamatTypeFilter: ''
+/* 				postamatTypeFilter: '' */
 			}}
 			onSubmit={values => setFilters(values)}
 			>
@@ -142,18 +138,6 @@ const FiltersForm = () => {
 									value={values.methodFilter}
 									onChange={option => onFilterChange("methodFilter", option, setFieldValue)}
 									options={methodOptions}
-									onBlur={handleBlur}
-									/>
-								</div>
-
-								<div className="filters__item">
-									<div className='filters__label'>Статус постамата</div>
-									<Select
-									placeholder={'Выбрать'}
-									id="postamatTypeFilter"
-									value={values.postamatTypeFilter}
-									onChange={option => onFilterChange("postamatTypeFilter", option, setFieldValue)}
-									options={postamatTypeOptions}
 									onBlur={handleBlur}
 									/>
 								</div>

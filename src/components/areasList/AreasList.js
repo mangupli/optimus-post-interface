@@ -113,7 +113,7 @@ const View = ({areas, onClick}) => {
 		<>
 			<div className="areas__caption">
 				<Link to="/postamats">
-						<span className="icon-buffer"></span>
+                    <span className="icon-compass2"></span>
 						<span className="text_bold text_color_accent"> Выбрать все районы</span>
 					</Link>
 				<div className="areas__total text">
@@ -133,7 +133,7 @@ const Emblem = ({src}) => {
 	let image = <img src={src} alt="Герб" />;
 
  	if(src.substring(src.length - 3) === 'svg'){
-		/*что-то сделать  чтобы грузилась svg*/
+		/*что-то сделать, чтобы грузилась svg*/
 	} 
 	
 	return image;

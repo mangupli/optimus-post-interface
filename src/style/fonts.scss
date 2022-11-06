@@ -1,10 +1,10 @@
-@font-face {
+  @font-face {
     font-family: 'iconFont';
-    src:  url('../assets/fonts/iconFont.eot?wwu8kk');
-    src:  url('../assets/fonts/iconFont.eot?wwu8kk#iefix') format('embedded-opentype'),
-      url('../assets/fonts/iconFont.ttf?wwu8kk') format('truetype'),
-      url('../assets/fonts/iconFont.woff?wwu8kk') format('woff'),
-      url('../assets/fonts/iconFont.svg?wwu8kk#iconFont') format('svg');
+    src:  url('../assets/fonts/iconFont.eot?ac9v2o');
+    src:  url('../assets/fonts/iconFont.eot?ac9v2o#iefix') format('embedded-opentype'),
+      url('../assets/fonts/iconFont.ttf?ac9v2o') format('truetype'),
+      url('../assets/fonts/iconFont.woff?ac9v2o') format('woff'),
+      url('../assets/fonts/iconFont.svg?ac9v2o#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -25,17 +25,39 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  .icon-metro:before {
+    content: "\e906";
+    color: #ff0013;
+  }
+  .icon-bus .icon-path1:before {
+    content: "\e902";
+    color: rgb(42, 92, 220);
+  }
+  .icon-bus .icon-path2:before {
+    content: "\e903";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-location .path1:before {
+    content: "\e904";
+    color: rgb(240, 128, 44);
+  }
+  .icon-location .path2:before {
+    content: "\e905";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-arrowDown:before {
+    content: "\e901";
+    color: #fff;
+    font-size: 9px;
+  }
   .icon-buffer:before {
     content: "\e900";
     color: #2A5CDC;
   }
   .icon-compass2:before {
     content: "\e94a";
-  }
+    color: #2A5CDC;
 
-  .icon-arrowDown:before {
-    content: "\e901";
-    color: #fff;
-    font-size: 9px;
   }
-  

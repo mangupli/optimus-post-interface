@@ -29,7 +29,9 @@ const initialState = {
 	//postamats
 	postamats: [],
 	postamatsLoadingStatus: 'idle',
-	filteredPostamats: [],
+	oldPostamats: [],
+	newPostamats: [],
+	chosenPostamats: [],
 
 	//heatmap
 	heatmap: false
@@ -42,14 +44,14 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				activeDistrictId: action.payload,
-				activeDistrictFilter: state.districtOptions.filter(districtOption => districtOption.value === action.payload),				
+				activeDistrictFilter: state.districtOptions.filter(districtOption => districtOption.value === action.payload)[0],				
 			}
 		}
 		case 'ACTIVE_AREA_CHANGED':{
 			return {
 				...state,
 				activeAreaId: action.payload,
-				activeAreaFilter: state.areaOptions.filter(areaOption => areaOption.value === action.payload),				
+				activeAreaFilter: state.areaOptions.filter(areaOption => areaOption.value === action.payload)[0],				
 			}
 		}
 		case 'UPDATE_ACTIVE_AREA_INFO':{
@@ -137,6 +139,21 @@ const reducer = (state = initialState, action) => {
 				...state,
 				postamatsLoadingStatus: 'idle',
 				postamats: action.payload
+			}
+		case 'SET_OLD_POSTAMATS':
+			return{
+				...state,
+				oldPostamats: action.payload
+			}
+		case 'SET_NEW_POSTAMATS':
+			return{
+				...state,
+				newPostamats: action.payload
+			}
+		case 'SET_CHOSEN_POSTAMATS':
+			return{
+				...state,
+				chosenPostamats: action.payload
 			}
 		case 'POSTAMATS_FETCHING_ERROR':
 			return{

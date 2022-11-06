@@ -54,8 +54,7 @@ export const MapGLComponent = (props) => {
             <div id="map-container">
                 <PolygonSource purpose={'areas-outline'} id={'polygons-layer'} />
                 {children}
-            </div>
-            
+            </div>            
         </>
     );
 };

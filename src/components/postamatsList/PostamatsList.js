@@ -14,7 +14,8 @@ import "./postamatsList.scss"
 
 const PostamatsList = ({filters}) => {
 
-    const postamats = useSelector(state => state.postamats);
+    const newPostamats = useSelector(state => state.newPostamats);
+    const oldPostamats = useSelector(state => state.oldPostamats);
 
     const { loadPostamats } = useRequestService();
     const postamatsLoadingStatus = useSelector(state => state.postamatsLoadingStatus);
@@ -25,17 +26,28 @@ const PostamatsList = ({filters}) => {
 
     const spinner = (postamatsLoadingStatus === "loading") ? <Spinner/> : null;
 	const errorMessage = (postamatsLoadingStatus === "error") ?  <ErrorMessage/> : null;
-/* 	const content = (postamatsLoadingStatus === "idle")  ? <View postamats={postamats}/> : null; */
-    const content = (postamatsLoadingStatus === "idle")  ? <PostamatForm postamats={postamats}/> : null; 
+    const predict = (postamatsLoadingStatus === "idle")  ? <PostamatForm postamats={newPostamats}/> : null; 
+
+    const oldPostamatsCards = oldPostamats.map(postamat=>{
+        return <PostamatCard postamat={postamat} key={postamat.id}/>
+    })
 
     return(
+        <>
+        <div className="postamats-list__title">Рекомендованные постаматы</div>
         <div className='postamats-list'>                   
                 {errorMessage}
                 {spinner}
-                {content}        
+                {predict}        
         </div>
+        <div className="postamats-list__title">Установленные постаматы</div>
+         <div className='postamats-list'>   
+            <div className='postamats-list__wrapper'>                 
+                {oldPostamatsCards}        
+            </div>
+        </div>
+        </>
     )
 }
-
 
 export default PostamatsList;

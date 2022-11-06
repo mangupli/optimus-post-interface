@@ -4,7 +4,7 @@ import { useMapContext } from "../contexts/MapContext";
 
 import { cityCenter } from '../constants';
 
-import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon, markersFetched, areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError } from '../actions/'
+import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon, markersFetched, areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats, setChosenPostamats } from '../actions/'
 import { useCallback } from 'react';
 
 export const useRequestService = () => {
@@ -30,7 +30,10 @@ export const useRequestService = () => {
                 dispatch(updateActiveDistrictInfo(data));
                 dispatch(updateMapCenter(data.center_coord));
                 dispatch(updateRenderedPolygon(data.polygon));
-                dispatch(markersFetched([data.center_coord]));
+                
+                // when you change active area or district — you need to reset filters and postamats
+                dispatch(sumbitFilters(undefined));
+                dispatch(postamatsFetched([]));
                 return data;
             })
             .then(data=>{
@@ -96,7 +99,9 @@ export const useRequestService = () => {
                 dispatch(updateActiveAreaInfo(data));
                 dispatch(updateMapCenter(data.center_coord));
                 dispatch(updateRenderedPolygon(data.polygon));
-                dispatch(markersFetched([data.center_coord]));
+                 // when you change active area or district — you need to reset filters and postamats
+                dispatch(sumbitFilters(undefined));
+                dispatch(postamatsFetched([]));
                 return data;
             })
             .then(data=>{
@@ -133,7 +138,12 @@ export const useRequestService = () => {
 
         request(`${api_base}/automatic_post_offices`, 'POST', JSON.stringify(body))
 		.then(data => {
-			dispatch(postamatsFetched(data.automatic_post_offices));
+            const postamats = data.automatic_post_offices;
+			dispatch(postamatsFetched(postamats));
+            const oldPostamats = postamats.filter(postamat => postamat.is_placed === true);
+            dispatch(setOldPostamats(oldPostamats));
+            const newPostamats = postamats.filter(postamat => postamat.is_placed === false);
+            dispatch(setNewPostamats(newPostamats));
 		})
 		.catch(() => dispatch(postamatsFetchingError()));
 

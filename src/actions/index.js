@@ -106,6 +106,27 @@ export const postamatsFetched = (postamats) => {
     }
 }
 
+export const setOldPostamats = (postamats) => {
+    return {
+        type: 'SET_OLD_POSTAMATS',
+        payload: postamats
+    }
+}
+
+export const setNewPostamats = (postamats) => {
+    return {
+        type: 'SET_NEW_POSTAMATS',
+        payload: postamats
+    }
+}
+
+export const setChosenPostamats = (postamats) => {
+    return {
+        type: 'SET_CHOSEN_POSTAMATS',
+        payload: postamats
+    }
+}
+
 export const postamatsFetchingError = () => {
     return {
         type: 'POSTAMATS_FETCHING_ERROR'
@@ -143,12 +164,12 @@ export const sumbitFilters = (filtersObj) => {
     
 /*         filters.predict = filtersObj.methodFilter.value; */
     
-        if(filtersObj.postamatTypeFilter === "" || filtersObj.postamatTypeFilter.value === "all"){
+/*         if(filtersObj.postamatTypeFilter === "" || filtersObj.postamatTypeFilter.value === "all"){
             filters.is_placed = null;
         }
         else{
             filters.is_placed = filtersObj.postamatTypeFilter.value;
-        }
+        } */
     
         if(filtersObj.locationFilter === "" || filtersObj.locationFilter.value === "all"){
             filters.placement_object_type_id = null;

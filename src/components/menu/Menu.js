@@ -47,7 +47,7 @@ const Menu = () => {
             <div className="container">
                 <Link to="/postamats" onClick={() => pickAndShowDistrict('all')
                 }>
-                    <span className="icon-buffer"></span>
+                    <span className="icon-compass2"></span>
                     <span className="text_bold text_color_accent"> Выбрать все округа</span>
                 </Link>
                 <div className="menu__wrapper">

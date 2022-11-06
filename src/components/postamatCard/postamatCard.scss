@@ -1,16 +1,49 @@
 .postamat-card{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
-    background: white;
-    height: 100px;
+    background: #FFFFFF;
     box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
-    padding: 0 50px;
-    & > div{
-        width: 300px;
-    }
+    border-radius: 10px;
+    padding: 25px;
     &_active{
         outline: 3px solid var(--border-color);
+    }
+    &__geo{
+        display: flex;
+        &-name{
+            border: 2px solid #B5CAF6;
+            border-radius: 24.8462px;
+            display: flex;
+            height: 29.96px;
+            justify-content: center;
+            align-items: center;
+            padding: 0 18px;
+            margin-right: 10px;
+        }
+    }
+    &__address{
+        margin-top: 15px;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 29px;
+        color: var(--main-color);
+    }
+    &__transport{
+        margin-top: 10px;
+        display: flex;
+        gap: 45px;
+    }
+    &__info{
+        width: calc(100% - 30px);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    &__info{
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 4px solid var(--bg-color);
+    }
+    &__subtitle{
+        margin-bottom: 10px;
     }
 }

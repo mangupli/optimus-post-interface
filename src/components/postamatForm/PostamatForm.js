@@ -35,7 +35,7 @@ const PostamatForm = (props) =>{
       const items = postamats.map(postamat => {
         const{id} = postamat;
         return(
-            <label key={id} style={{display: 'flex', gap: '10px'}}>
+            <label key={id} className="postamats-list__label">
                 <input
                     id={id}
                     name={id}
@@ -43,18 +43,23 @@ const PostamatForm = (props) =>{
                     onChange={e=>changeField(e)}
                     onBlur={formik.handleBlur}
                     value={formik.values.id}
+                    className="postamats-list__input"
                     />
                  <PostamatCard postamat={postamat} choosen={formik.values[id]}/>
-			</label>  
+                 <div className="postamats-list__choose text_bold">Выбрать</div>
+			      </label>  
         );
       })
  
       return (
-   
-        <form onSubmit={formik.handleSubmit} className="postamats-list__wrapper">
-            {items}			
-          <button type="submit" className='button button_small'>Выбрать</button>   
-        </form>
+        <>           
+          <form onSubmit={formik.handleSubmit} className="postamats-list__wrapper">
+              {items}			
+            <button type="submit" className='button button_small'>Выбрать</button>   
+            <button type="button" className='button button_small'>Карта (pdf)</button>  
+          </form>         
+        </>
+
    
       );
 };

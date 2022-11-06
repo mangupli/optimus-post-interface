@@ -1,8 +1,28 @@
 .postamats-list{
-    padding: 22px 0;
+    margin-top: 15px;
     &__wrapper{
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 20px;
+    }
+    &__title{
+        margin-top: 50px;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 19px;
+		color: #333333;
+	}
+    &__input{
+        position: absolute;
+        right: 35px;
+        top: 35px;
+    }
+    &__label{
+        position: relative;
+    }
+    &__choose{
+        position: absolute;
+        right: 55px;
+        top: 32px;
     }
 }
