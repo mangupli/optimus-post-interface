@@ -4,16 +4,16 @@ import { MapContext } from '../../contexts/MapContext';
 
 import { load } from '@2gis/mapgl';
 
-import ClustererBase from './Clusterer';
 import PolygonSource from './PolygonSource';
-import MarkersSource from './MarkersSource';
-import HeatMapSource from './HeatMapSource';
+
 
 import store from '../../store';
 
 import './map.scss';
 
-export const MapGL = () => {
+export const MapGLComponent = (props) => {
+
+    const {children} = props;
     // eslint-disable-next-line
     const [_, setMapInstance] = useContext(MapContext);
 
@@ -51,25 +51,16 @@ export const MapGL = () => {
 
     return (
         <>
-            <MapWrapper>
+            <div id="map-container">
                 <PolygonSource purpose={'areas-outline'} id={'polygons-layer'} />
-{/*                 <MarkersSource purpose={'postamats-markers'} id={'markers-layer'}/> */}
-                <HeatMapSource purpose={'heatmap'} id={'heatmap-layer'}/>
-
-{/*                 <ClustererBase/> */}
-            </MapWrapper>
+                {children}
+            </div>
             
         </>
     );
 };
 
-const MapWrapper = memo(
-    ({children}) => {
-        return (<div id="map-container">
-            {children}
-        </div>);
-    },
-    () => true,
-);
+
+const MapGL = memo(MapGLComponent);
 
 export default MapGL;

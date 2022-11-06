@@ -10,8 +10,11 @@ const HeatMapSource = ({id, purpose}) => {
     const [ mapInstance ] = useMapContext();
 
     const postamats = useSelector(state => state.postamats);
+    const heatmap = useSelector(state => state.heatmap)
 
     const [source, setSource] = useState(null);
+
+    console.log('render HeatMap');
 
     useEffect(() => {
     if (mapInstance && postamats) {
@@ -34,6 +37,7 @@ const HeatMapSource = ({id, purpose}) => {
         }
 
         load().then(mapglAPI => {
+            console.log('create cource');
 
             instance = new mapglAPI.GeoJsonSource(mapInstance, {
                 data,
@@ -52,6 +56,7 @@ const HeatMapSource = ({id, purpose}) => {
     }
     return undefined;
     }, [mapInstance, postamats]);
+    
 
 /*     return null; */
 
@@ -61,6 +66,7 @@ const HeatMapSource = ({id, purpose}) => {
             id={id}
             purpose={purpose}
             source={source}
+            show={heatmap}
             />
         )
 
@@ -68,7 +74,7 @@ const HeatMapSource = ({id, purpose}) => {
 
 const Layer = (props) => {
 
-    const {map, id, purpose, source} = props;
+    const {map, id, purpose, source, show} = props;
 
     const [layer, setLayer] = useState({
         id: id, 
@@ -105,10 +111,11 @@ const Layer = (props) => {
         },
     });
 
-/*     useEffect(()=>{
+    useEffect(()=>{
      
-        if(map && source){
+        if(map/*  && source */){
             map.addLayer(layer);
+            console.log('add heatmap layer');
 
             return () => {
                 map.removeLayer(id);                  
@@ -117,12 +124,13 @@ const Layer = (props) => {
         return undefined;
 
 
-    }, [source]) */
+    }, [show, map, source])
 
-    useEffect(()=>{
+/*     useEffect(()=>{
 
         if(map){
             map.on('styleload', ()=> map.addLayer(layer))
+            console.log('change map add layer');
 
             return () => {
                     map.removeLayer(id);                  
@@ -130,7 +138,7 @@ const Layer = (props) => {
         }
         return undefined;
 
-    }, [map])
+    }, [map]) */
 
 
     return null;

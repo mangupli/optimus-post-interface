@@ -1,5 +1,5 @@
 import FiltersForm from "../filtersForm/FiltersForm";
-import MainMapWrapper from "../mainMap/MainMap";
+import MainMap from "../map/MainMap";
 import Postamats from "../postamats/Postamats";
 
 const PostamatsPage = () => {
@@ -7,7 +7,7 @@ const PostamatsPage = () => {
       <>
             <FiltersForm />
             <div className="container">
-              <MainMapWrapper /> 
+              <MainMap /> 
               <Postamats/>
             </div>
       </>

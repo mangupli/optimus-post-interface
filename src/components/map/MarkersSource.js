@@ -1,4 +1,4 @@
-import { useEffect,  useState, useRef } from 'react';
+import { useEffect,  useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useMapContext } from '../../contexts/MapContext';
@@ -10,6 +10,7 @@ const MarkersSource = ({id, purpose}) => {
     const [ mapInstance ] = useMapContext();
 
     const postamats = useSelector(state => state.postamats);
+    const heatmap = useSelector(state => state.heatmap)
 
     const [source, setSource] = useState(null);
 
@@ -54,6 +55,7 @@ const MarkersSource = ({id, purpose}) => {
         };
     }
     return undefined;
+    // eslint-disable-next-line
     }, [mapInstance, postamats]);
 
 /*     return null; */
@@ -64,6 +66,7 @@ const MarkersSource = ({id, purpose}) => {
             id={id}
             purpose={purpose}
             source={source}
+            show={!heatmap}
             />
         )
 
@@ -71,7 +74,7 @@ const MarkersSource = ({id, purpose}) => {
 
 const Layer = (props) => {
 
-    const {map, id, purpose, source} = props;
+    const {map, id, purpose, source, show} = props;
 
     const [layer, setLayer] = useState({
         id: id, 
@@ -95,10 +98,11 @@ const Layer = (props) => {
         },
     });
 
-/*     useEffect(()=>{
+    useEffect(()=>{
      
-        if(map && source){
+        if(map/*  && source */){
             map.addLayer(layer);
+            console.log('add heatmap layer');
 
             return () => {
                 map.removeLayer(id);                  
@@ -106,9 +110,9 @@ const Layer = (props) => {
         }
         return undefined;
 
-
-    }, [source]) */
-
+    // eslint-disable-next-line
+    }, [show, map, source])
+/* 
     useEffect(()=>{
 
         if(map){
@@ -120,7 +124,7 @@ const Layer = (props) => {
         }
         return undefined;
 
-    }, [map])
+    }, [map]) */
 
 
     return null;

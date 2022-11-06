@@ -1,22 +1,27 @@
 import { useState, memo } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
-import MapGL from "../map/MapGL";
+import MapGL from "./MapGL";
 
 import { useMapContext } from '../../contexts/MapContext';
+import HeatMapSource from './HeatMapSource';
+import MarkersSource from "./MarkersSource";
 
-import { switchHeatmap } from '../../actions/'
+import { switchHeatmap } from '../../actions'
 
 import "./mainMap.scss"
 
-const MainMap = () => {
+const MainMapComponent = (props) => {
+
 
     const [hidden, setHidden] = useState(false);
 
     const [mapInstance] = useMapContext();
 
     const dispatch = useDispatch();
+
+    const heatmap = useSelector(state => state.heatmap)
 
     const rollMap = () => {
         setHidden(prevState => !prevState);
@@ -30,10 +35,14 @@ const MainMap = () => {
         'map_hidden': hidden
     });
 
+    const source = heatmap ? <HeatMapSource purpose={'heatmap'} id={'heatmap-layer'}/>  : <MarkersSource purpose={'postamats-markers'} id={'markers-layer'}/>;
+
     return(
         <div className="main-map">
             <div className={mapClass}>
-                <MapGL/>
+                <MapGL>
+                    {source}
+                </MapGL>
                 <div className="map__control">
                     <div className="text_bold text_color_white map__title">Карта</div>
                     <label className="toggle">
@@ -49,11 +58,6 @@ const MainMap = () => {
         </div>
     )}
 
-const MainMapWrapper = memo(
-    () => {
-        return <MainMap/>
-    },
-    () => true,
-);
+const MainMap = memo(MainMapComponent);
 
-export default MainMapWrapper;
+export default MainMap;

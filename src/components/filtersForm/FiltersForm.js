@@ -31,6 +31,7 @@ const FiltersForm = () => {
 	//to show on the map while changing filters
 	const  onChangeDistrictFilter = (option, setFieldValue) => {
 		dispatch(sumbitFilters(undefined));
+		dispatch(postamatsFetched([]));
 		const districtId = option.value;
 		pickAndShowDistrict(districtId);
 		loadAreas(districtId);
@@ -40,6 +41,7 @@ const FiltersForm = () => {
 
 	const  onChangeAreaFilter = (option, setFieldValue) => {
 		const areaId = option.value;
+		dispatch(postamatsFetched([]));
 		dispatch(sumbitFilters(undefined));
 		pickAndShowArea(areaId);
 		setFieldValue("areaFilter", option);
