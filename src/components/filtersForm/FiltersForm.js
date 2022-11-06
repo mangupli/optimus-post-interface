@@ -167,33 +167,5 @@ const FiltersForm = () => {
 	);
 }
 
-/* const PostamatsList = (props) => {
-	return(
-		<div className="postamats-list" style={{marginTop: '20px'}}>
-			<MyCheckbox name="postamat">
-				<PostamatCard/>
-			</MyCheckbox>
-		</div>
-);
-}
-
-const MyCheckbox = ({children, ...props}) => {
-  
-	//field — объект с пропсами + onBlur + onChange...
-	//meta — метаданные с ошибками, и был ли использован этот инпут
-	const [field, meta] = useField({...props, type: 'checkbox'});
-
-	return(
-		<>
-			<label style={{display: 'flex', gap: '10px'}}>
-				<input type="checkbox" {...props} {...field} /> 
-					{children}
-			</label>
-		   {meta.touched && meta.error ? (
-				<div className='error'>{meta.error}</div>
-		   ) : null}
-		</>
-	);
-} */
 
 export default FiltersForm;

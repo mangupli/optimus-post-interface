@@ -55,8 +55,6 @@ const HeatMapSource = ({id, purpose}) => {
     }, [mapInstance, postamats]);
     
 
-/*     return null; */
-
         return( 
         <Layer
             map={mapInstance}
