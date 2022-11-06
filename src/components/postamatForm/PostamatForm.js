@@ -22,6 +22,10 @@ const PostamatForm = (props) => {
 
 
     const init = {};
+    postamats.forEach(postamat => {
+      const id = postamat.id;
+      init[id]= false;
+    });
 
     const toPdf = () => {
         setDisabledToPdf(true)
@@ -37,11 +41,6 @@ const PostamatForm = (props) => {
             }).finally(() => setDisabledToPdf(false))
     }
 
-    postamats.forEach(postamat => {
-        const id = postamat.id;
-        init[id]= false;
-    });
-
     const formik = useFormik({
 
         initialValues: init,
@@ -54,6 +53,10 @@ const PostamatForm = (props) => {
         },
    
       });
+
+      const changeHeatMap = (values) => {
+        console.log(values);
+      }
 
       const changeField = (e) => {
         formik.handleChange(e);
@@ -101,6 +104,7 @@ const PostamatForm = (props) => {
                 <div className="postamats-list__panel-wrapper">
                   <div className="postamats-list__total">{`Выбрано ${chosenItems} постаматов`}</div>
                   <div className="postamats-list__buttons">
+                    <button type="button" onClick={() => changeHeatMap(formik.values)}className='button_form'>Обновить карту</button>
                     <button type="submit" className='button_form'>Постаматы (excel)</button>   
                     <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf}>Карта (pdf)</button>
                   </div>

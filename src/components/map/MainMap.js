@@ -14,7 +14,6 @@ import "./mainMap.scss"
 
 const MainMapComponent = (props) => {
 
-
     const [hidden, setHidden] = useState(false);
 
     const [mapInstance] = useMapContext();
@@ -54,6 +53,8 @@ const MainMapComponent = (props) => {
                         <i className="icon-arrowDown"></i>
                     </div>
                 </div>
+                <div className="little_text">*Серым цветом обозначены рекомендованые постаматы, голубым — поставленные.<br/> На тепловой изначально отображаются только поставленные постаматы. Можно обновить тепловую карту с выбранными постаматами ниже.</div>
+                
             </div>
         </div>
     )}

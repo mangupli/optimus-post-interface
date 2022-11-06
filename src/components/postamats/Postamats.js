@@ -6,7 +6,7 @@ const Postamats = () => {
 
     if(!filters){
         return (
-            <h3 className="text_bold" style={{textAlign: "center", margin: "20px 0"}}>Настройте нужные фильтры и отобразится список постаматов</h3>
+            <h3 className="text_bold" style={{textAlign: "center", margin: "50px 0 20px"}}>Настройте нужные фильтры и отобразится список постаматов</h3>
         );
     }
 

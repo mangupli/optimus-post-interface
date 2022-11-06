@@ -21,20 +21,21 @@ const MarkersSource = ({id, purpose}) => {
 
         const data = {
             type: 'FeatureCollection',
-            features: postamats.map(postamat => ({
-                    type: 'Feature',
+            features: postamats.map(postamat => {
+                   const color = postamat.is_placed ? 'blue' : 'grey';
+                   return { type: 'Feature',
                     //custom propertie, helps with events
                     properties: {
                         type: 'marker',
                         label: postamat.id,
-                        color: 'blue',
+                        color: color,
                         name: `Moscow Postamat №${postamat.id}`
                     },
                     geometry: {
                         type: 'Point',
                         coordinates: postamat.geo_data,
-                    },
-                }))
+                    },}
+                })
         }
 
         load().then(mapglAPI => {

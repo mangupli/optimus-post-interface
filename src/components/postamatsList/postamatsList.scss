@@ -6,7 +6,7 @@
         gap: 20px;
     }
     &__title{
-        margin-top: 50px;
+        margin-top: 60px;
 		font-weight: 500;
 		font-size: 16px;
 		line-height: 19px;
@@ -38,7 +38,7 @@
         box-shadow: 0px -6px 31px rgba(0, 0, 0, 0.1);
         &-wrapper{
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 2fr 1fr;
             align-items: center;
         }
     }
