@@ -102,8 +102,6 @@ const Layer = (props) => {
      
         if(map/*  && source */){
             map.addLayer(layer);
-            console.log('add heatmap layer');
-
             return () => {
                 map.removeLayer(id);                  
             };

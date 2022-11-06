@@ -14,8 +14,6 @@ const HeatMapSource = ({id, purpose}) => {
 
     const [source, setSource] = useState(null);
 
-    console.log('render HeatMap');
-
     useEffect(() => {
     if (mapInstance && postamats) {
 
@@ -37,7 +35,6 @@ const HeatMapSource = ({id, purpose}) => {
         }
 
         load().then(mapglAPI => {
-            console.log('create cource');
 
             instance = new mapglAPI.GeoJsonSource(mapInstance, {
                 data,
@@ -115,7 +112,6 @@ const Layer = (props) => {
      
         if(map/*  && source */){
             map.addLayer(layer);
-            console.log('add heatmap layer');
 
             return () => {
                 map.removeLayer(id);                  
