@@ -11,7 +11,6 @@ const HeatMapSource = ({id, purpose}) => {
 
     const postamats = useSelector(state => state.oldPostamats);
     const heatmap = useSelector(state => state.heatmap);
- 
 
     const [source, setSource] = useState(null);
 

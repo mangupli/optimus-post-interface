@@ -29,7 +29,7 @@ const initialState = {
 	postamatsLoadingStatus: 'idle',
 	oldPostamats: [],
 	newPostamats: [],
-/* 	chosenPostamats: [], */
+	//chosenPostamats: [],
 
 	//heatmap
 	heatmap: false,
