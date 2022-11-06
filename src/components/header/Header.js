@@ -10,7 +10,7 @@ import './header.scss'
 
 const Header = () => {
 
-    const api_base = 'http://188.72.109.162:3000/api/v1';
+    const api_base = process.env.REACT_APP_HOST === 'localhost' ? 'http://localhost:3000/api/v1' : 'http://188.72.109.162:3000/api/v1';
 
     const dispatch = useDispatch();
     const { request } = useHttp();
