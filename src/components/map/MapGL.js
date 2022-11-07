@@ -5,7 +5,6 @@ import { MapContext } from '../../contexts/MapContext';
 import { load } from '@2gis/mapgl';
 
 import PolygonSource from './PolygonSource';
-
 import store from '../../store';
 
 import './map.scss';

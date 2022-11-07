@@ -77,14 +77,14 @@ const View = ({areas, onClick}) => {
 									{post_office.placed}
 								</div>
 							</div>
-{							<div className="area__result">
+{/* {							<div className="area__result">
 								<div className="text">
 									Постаматов
 								</div>
 								<div className="text_bold">
 									{post_office.placed}
 								</div>
-							</div>}
+							</div>} */}
 							<div className="area__result">
 								<div className="text">
 									Мест свободно

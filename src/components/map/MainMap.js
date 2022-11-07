@@ -7,6 +7,8 @@ import MapGL from "./MapGL";
 import { useMapContext } from '../../contexts/MapContext';
 import HeatMapSource from './HeatMapSource';
 import MarkersSource from "./MarkersSource";
+import ClustererBase from './Clusterer';
+import RouteSource from "./ RouteSource";
 
 import { switchHeatmap } from '../../actions'
 
@@ -41,6 +43,8 @@ const MainMapComponent = (props) => {
             <div className={mapClass}>
                 <MapGL>
                     {source}
+                    <ClustererBase/>
+                    <RouteSource purpose={'pedestrian-routes'} id={'routes-layer'}/>
                 </MapGL>
                 <div className="map__control">
                     <div className="text_bold text_color_white map__title">Карта</div>
