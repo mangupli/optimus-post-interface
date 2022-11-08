@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useRequestService } from '../../services/RequestService';
@@ -34,7 +34,7 @@ const PostamatsList = ({filters}) => {
     return(
         <>
             <div className="container">
-                <div className="postamats-list__title">Рекомендованные постаматы</div>
+                <div className="postamats-list__title">{`Рекомендованные постаматы : ${newPostamats.length}`}</div>
             </div>
             
             <div className='postamats-list'>                   
@@ -44,7 +44,7 @@ const PostamatsList = ({filters}) => {
             </div>
 
             <div className="container">
-            <div className="postamats-list__title">Установленные постаматы</div>
+            <div className="postamats-list__title">{`Установленные постаматы : ${oldPostamats.length}`}</div>
                 <div className='postamats-list'>   
                     <div className='postamats-list__wrapper'>                 
                         {oldPostamatsCards}        

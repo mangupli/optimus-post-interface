@@ -34,7 +34,6 @@ const RouteSource = ({id, purpose}) => {
             ))                
         }
 
-        console.log(data);
 
         load().then(mapglAPI => {
 

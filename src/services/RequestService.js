@@ -20,15 +20,12 @@ export const useRequestService = () => {
 
         //email: 'optimus_post@yandex.ru', password: '123456789Aa!'
 
-        console.log(JSON.stringify(values));
-
         dispatch(loginLoading());
 
         request(`${api_base}/users/login`, 'POST', JSON.stringify(values))
 		.then(data => {
             dispatch(loginSuccess());
             localStorage.setItem('auth_token', data.auth_token);
-            console.log(data);
 		})
 		.catch((e) => {
             dispatch(loginError());
@@ -196,14 +193,24 @@ export const useRequestService = () => {
                 ...filters    
             }
 
-        console.log(JSON.stringify(body));
+//for tests
+/* 
+        const body = {
+            "ids": [],
+            "area_id": 1,
+            "district_id": 7,
+            "placement_object_type_id": 3,
+            "is_placed": true,
+            "sort": "-distance_to_metro,distance_to_bus,+predict_a"
+            }
+ */
 
         const headers = {
             'Content-Type': 'application/octet-stream',
             'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
         };
         
-        fetch(`${api_base}/automatic_post_offices/export_xlsx`,{method:  'POST', body: JSON.stringify(body), headers})
+        fetch(`${api_base}/automatic_post_offices/export_xlsx`, {method: 'POST', body: JSON.stringify(body), headers})
             .then(response => response.blob())
             .then(blob => {
                 const url = window.URL.createObjectURL(blob);
@@ -211,7 +218,8 @@ export const useRequestService = () => {
                 a.href = url;
                 a.download = "Постаматы.xlsx";
                 document.body.appendChild(a);
-                a.click();
+                a.click();              
+                window.URL.revokeObjectURL(url);
                 a.remove();
             })
 		.catch(e => console.log(e))

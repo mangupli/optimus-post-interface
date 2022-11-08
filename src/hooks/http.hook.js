@@ -3,15 +3,15 @@ import { useCallback } from "react";
 export const useHttp = () => {
     // const [process, setProcess] = useState('waiting');   
 
-    const request = useCallback(async (url, method = 'GET', body = null/* , headers = {'Content-Type': 'application/json'} */) => {
+    const defaultHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+    };
+
+    const request = useCallback(async (url, method = 'GET', body = null, headers = defaultHeaders) => {
 
         // setProcess('loading');
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-        };
-
-
+        
         try {
             const response = await fetch(url, {method, body, headers});
 

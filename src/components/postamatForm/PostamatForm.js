@@ -106,7 +106,7 @@ const PostamatForm = (props) => {
                 <div className="postamats-list__panel-wrapper">
                   <div className="postamats-list__total">{`Выбрано ${chosenItems} постаматов`}</div>
                   <div className="postamats-list__buttons">
-                    <button type="button" onClick={() => changeHeatMap(formik.values)}className='button_form'>Обновить карту</button>
+                    <button type="button" onClick={() => changeHeatMap(formik.values)} className='button_form' disabled>Обновить карту</button>
                     <button type="submit" className='button_form' disabled={formik.isSubmitting}>Постаматы (excel)</button>
                     <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf || formik.isSubmitting}>Карта (pdf)</button>
                   </div>
