@@ -1,22 +1,24 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
 import { Link } from 'react-router-dom';
-
-import { useRequestService } from '../../services/RequestService';
-
 import classNames from 'classnames';
 
+import { useRequestService } from '../../services/RequestService';
 import './menu.scss'
 
 const Menu = () => {
 
     const {districts, activeDistrictId} = useSelector(state => state);
 
-    const { pickAndShowDistrict } = useRequestService();
+    const { pickAndShowDistrict, loadDistricts } = useRequestService();
 
     const onClick = (id) => {
         pickAndShowDistrict(id);
     }
+
+    useEffect (() => {
+        loadDistricts();
+    },[]);
 
     const renderDistricts = (districts) => {
         const elems = districts.map((district, index) => {

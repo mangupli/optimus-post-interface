@@ -2,10 +2,10 @@ import { useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRequestService } from '../../services/RequestService';
 
-import { Formik, Form, Field, useField, useFormikContext} from "formik";
+import { Formik, Form} from "formik";
 import Select from 'react-select';
 
-import { methodOptions, postamatTypeOptions, sortOptions } from '../../constants';
+import { methodOptions,sortOptions } from '../../constants';
 
 import {sumbitFilters, postamatsFetched, setOldPostamats, setNewPostamats} from '../../actions'
 
@@ -20,12 +20,13 @@ const FiltersForm = () => {
 	const activeAreaFilter = useSelector(state => state.activeAreaFilter);
 	const locationOptions = useSelector(state => state.locationOptions);
 
-	const {loadAreas, pickAndShowDistrict, pickAndShowArea, loadLocations} = useRequestService();
+	const {loadAreas, pickAndShowDistrict, pickAndShowArea, loadLocations, loadDistricts} = useRequestService();
 
 	const dispatch = useDispatch();
 
 	useEffect(()=>{
 		loadLocations();
+		loadDistricts();
 	}, []);
 
 	//to show on the map while changing filters

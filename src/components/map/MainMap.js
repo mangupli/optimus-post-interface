@@ -8,7 +8,7 @@ import { useMapContext } from '../../contexts/MapContext';
 import HeatMapSource from './HeatMapSource';
 import MarkersSource from "./MarkersSource";
 import ClustererBase from './Clusterer';
-import RouteSource from "./ RouteSource";
+import RouteSource from "./RouteSource";
 
 import { switchHeatmap } from '../../actions'
 

@@ -91,25 +91,12 @@ const Layer = (props) => {
         // Стиль объекта отрисовки
         style: {
             color: '#8B008B',
-            width: 10,
+            width: 5,
             dashLength: 10,
             gapLength: 5,
         },
     });
 
-    useEffect(()=>{
-     
-        if(map/*  && source */){
-            map.addLayer(layer/* , '973940' */);
-            return () => {
-                map.removeLayer(id);                  
-            };
-        }
-        return undefined;
-
-    // eslint-disable-next-line
-    }, [map, source])
-/* 
     useEffect(()=>{
 
         if(map){
@@ -121,7 +108,7 @@ const Layer = (props) => {
         }
         return undefined;
 
-    }, [map]) */
+    }, [map]) 
 
 
     return null;

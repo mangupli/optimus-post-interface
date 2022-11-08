@@ -4,7 +4,7 @@ import { useMapContext } from "../contexts/MapContext";
 
 import { cityCenter } from '../constants';
 
-import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats } from '../actions/';
+import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters, setNewPostamats, setOldPostamats,loginError, loginLoading, loginSuccess, districtsFetched } from '../actions/';
 import { useCallback } from 'react';
 
 export const useRequestService = () => {
@@ -15,6 +15,26 @@ export const useRequestService = () => {
     const dispatch = useDispatch();
 
     const [mapInstance] = useMapContext();
+
+    const authenticate = useCallback((values) => {
+
+        //email: 'optimus_post@yandex.ru', password: '123456789Aa!'
+
+        console.log(JSON.stringify(values));
+
+        dispatch(loginLoading());
+
+        request(`${api_base}/users/login`, 'POST', JSON.stringify(values))
+		.then(data => {
+            dispatch(loginSuccess());
+            localStorage.setItem('auth_token', data.auth_token);
+            console.log(data);
+		})
+		.catch((e) => {
+            dispatch(loginError());
+            localStorage.clear();
+        });
+    } , [])
 
     const pickAndShowDistrict = useCallback((districtId) => {
         if(districtId === 'all') {
@@ -63,6 +83,14 @@ export const useRequestService = () => {
             .catch(e => console.log(e))
         }
     }, [])
+
+    const loadDistricts = useCallback(()=>{
+        request(`${api_base}/districts/`)
+        .then(data => {
+            dispatch(districtsFetched(data));
+        })
+        .catch(e => console.log(e))
+    }, []);
 
     const loadAreas = useCallback((districtId) => {
         dispatch(areasLoading());
@@ -158,7 +186,7 @@ export const useRequestService = () => {
         let chosenPostamats = [];
 
         for(let key in values){
-            if(values[key] === true){
+            if(values[key]){
                 chosenPostamats.push(+key);
             }
         }
@@ -167,8 +195,15 @@ export const useRequestService = () => {
                 ids: chosenPostamats,
                 ...filters    
             }
+
+        console.log(JSON.stringify(body));
+
+        const headers = {
+            'Content-Type': 'application/octet-stream',
+            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        };
         
-        fetch(`${api_base}/automatic_post_offices/export_xlsx`,{method:  'POST', body: JSON.stringify(body),headers: { 'Content-Type': 'application/octet-stream'}})
+        fetch(`${api_base}/automatic_post_offices/export_xlsx`,{method:  'POST', body: JSON.stringify(body), headers})
             .then(response => response.blob())
             .then(blob => {
                 const url = window.URL.createObjectURL(blob);
@@ -182,5 +217,5 @@ export const useRequestService = () => {
 		.catch(e => console.log(e))
     };
 
-    return { pickAndShowDistrict, loadAreas, pickAndUpdateDistrict, pickArea, pickAndShowArea, loadLocations, loadPostamats, exportPostamats };
+    return { pickAndShowDistrict, loadAreas, pickAndUpdateDistrict, pickArea, pickAndShowArea, loadLocations, loadPostamats, exportPostamats, authenticate, loadDistricts };
 }

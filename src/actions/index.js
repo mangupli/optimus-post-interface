@@ -1,3 +1,28 @@
+export const loginLoading = () => {
+    return {
+        type: 'LOGIN_LOADING'
+    }
+}
+
+export const loginSuccess = () => {
+    return {
+        type: 'LOGIN_SUCCESS'
+    }
+}
+
+export const loginError = () => {
+    return {
+        type: 'LOGIN_ERROR'
+    }
+}
+
+export const logout = () => {
+    localStorage.clear();
+    return {
+        type: 'LOGOUT'
+    }
+}
+
 export const activeDistrictChanged = (id) => {
     return {
         type: 'ACTIVE_DISTRICT_CHANGED',

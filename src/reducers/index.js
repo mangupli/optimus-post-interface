@@ -1,4 +1,7 @@
 const initialState = {
+	//login
+	loginLoadingStatus: 'idle',
+	user: false,
 
 	//districts filters
 	districts: [],
@@ -41,6 +44,28 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 	switch(action.type){
+		case 'LOGOUT': 
+		return {
+			...state,
+			user: false,
+		}
+		case 'LOGIN_LOADING': 
+		return {
+			...state,
+			loginLoadingStatus: 'loading',
+		}
+		case 'LOGIN_SUCCESS': 
+		return {
+			...state,
+			loginLoadingStatus: 'idle',
+			user: true
+		}
+		case 'LOGIN_ERROR': 
+		return {
+			...state,
+			loginLoadingStatus: 'error',
+			user: false
+		}
 		case 'ACTIVE_DISTRICT_CHANGED':{
 			return {
 				...state,

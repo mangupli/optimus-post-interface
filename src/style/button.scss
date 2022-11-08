@@ -46,6 +46,16 @@
         color: #FFFFFF;
         border: none;
         transition: 0.5s all;
+        &_xs{
+            width: 140px;
+        }
+        &_big{
+            width: 315px;
+            height: 52px;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 22px;
+        }
         &:active{
             background-color: var(--border-color);
         }

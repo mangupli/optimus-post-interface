@@ -1,0 +1,29 @@
+.login-form{
+    margin: 15vh auto 50vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &__container{
+        display: flex;
+        justify-content: center;
+    }
+    &__input{
+        width: 315px;
+        height: 52px;
+        left: 562px;
+        top: 404px;
+        padding-left: 16px;
+
+        border: 3px solid #D2D0CC;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 20px;
+        &_danger{
+            border: 3px solid #F62E46;
+        }
+    }
+    input::placeholder{
+        color: #9E9B98;
+    }
+}
