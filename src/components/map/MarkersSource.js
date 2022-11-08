@@ -26,10 +26,10 @@ const MarkersSource = ({id, purpose}) => {
                    return { type: 'Feature',
                     //custom propertie, helps with events
                     properties: {
-                        type: 'marker',
+                        type: postamat.is_placed ? 'marker-postamat-placed' : 'marker-postamat-predict',
                         label: postamat.id,
                         color: color,
-                        name: `Moscow Postamat №${postamat.id}`
+                        name: postamat.id
                     },
                     geometry: {
                         type: 'Point',
@@ -51,7 +51,9 @@ const MarkersSource = ({id, purpose}) => {
             setSource(instance);
 
         }) 
+
         return () => {
+
             instance && instance.destroy();            
         };
     }

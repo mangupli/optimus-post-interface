@@ -24,7 +24,8 @@ const RouteSource = ({id, purpose}) => {
                    { type: 'Feature',
                     //custom propertie, helps with events
                     properties: {
-                        type: 'route'
+                        type: 'route',
+                        name: 'the busiest route'
                     },
                     geometry: {
                         type: 'LineString',

@@ -5,6 +5,8 @@ import { useMapContext } from '../../contexts/MapContext';
 
 import { load } from '@2gis/mapgl';
 
+import store from '../../store';
+
 const HeatMapSource = ({id, purpose}) => {
 
     const [ mapInstance ] = useMapContext();
@@ -25,7 +27,9 @@ const HeatMapSource = ({id, purpose}) => {
                     type: 'Feature',
                     //custom propertie, helps with events
                     properties: {
-                        customProperty : 2
+                        customProperty : 2,
+                        type: 'postamat',
+                        name: 'postamat-placed'
                     },
                     geometry: {
                         type: 'Point',

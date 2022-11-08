@@ -1,8 +1,7 @@
 import { useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useFormik } from 'formik';
-import { chooseIds } from '../../actions';
+import { getIdsFromFormValues, selectId, deselectId, resetSelectedIds } from '../../actions';
 
 import { useRequestService } from '../../services/RequestService';
 
@@ -14,21 +13,17 @@ const PostamatForm = (props) => {
 
     const {postamats} = props;
 
-    const [chosenItems, setChosenItems] = useState(0);
-    const [disabledToPdf, setDisabledToPdf] = useState(false)
+  
+    const [disabledToPdf, setDisabledToPdf] = useState(false);
+
+    const [submitting, setSubmitting] = useState(false);
 
     const { exportPostamats } = useRequestService();
 
     const filters = useSelector(state => state.filters);
+    const selectedIds = useSelector(state => state.selectedIds);
 
     const dispatch = useDispatch();
-
-
-    const init = {};
-    postamats.forEach(postamat => {
-      const id = postamat.id;
-      init[id]= false;
-    });
 
     const toPdf = () => {
         setDisabledToPdf(true)
@@ -44,36 +39,33 @@ const PostamatForm = (props) => {
             }).finally(() => setDisabledToPdf(false))
     }
 
-    const formik = useFormik({
+    const handleSubmit = (filters, ids) => {
+        setSubmitting(true)
+/*         exportPostamats(filters, ids); */
+        console.log('export postamats need to do');
+        console.log(filters);
+        console.log(ids);
+        setSubmitting(false)
+    }
 
-        initialValues: init,
-   
-        onSubmit: (values, action) => {
-            action.setSubmitting(true)
-            exportPostamats(filters, values);
-            action.setSubmitting(false)
-        },
-   
-      });
-
+/* 
       const changeHeatMap = (values) => {
-        dispatch(chooseIds(values));
-      }
+        dispatch(getIdsFromFormValues(values));
+      } */
 
       const changeField = (e) => {
-        formik.handleChange(e);
-
         if(e.target.checked){
-          setChosenItems(prev => prev + 1)
+          dispatch(selectId(e.target.id));
         }
         else {
-          setChosenItems(prev => prev - 1)
+          dispatch(deselectId(e.target.id));
         }
         console.log(e.target);
       }
 
       const items = postamats.map(postamat => {
         const{id} = postamat;
+        const selected = selectedIds.includes(id);
         return(
             <label key={id} className="postamats-list__label">
                 <input
@@ -81,11 +73,10 @@ const PostamatForm = (props) => {
                     name={id}
                     type="checkbox"
                     onChange={e=>changeField(e)}
-                    onBlur={formik.handleBlur}
-                    value={formik.values[id]}
+                    checked={selected}
                     className="postamats-list__input"
                     />
-                 <PostamatCard postamat={postamat} choosen={formik.values[id]}/>
+                 <PostamatCard postamat={postamat} selected={selected}/>
                  <div className="postamats-list__choose text_bold">Выбрать</div>
 			      </label>  
         );
@@ -93,7 +84,6 @@ const PostamatForm = (props) => {
  
       return (
         <>           
-          <form onSubmit={formik.handleSubmit}>
             <div className="container">
               <div className="postamats-list__overflow">
                 <div className="postamats-list__wrapper">
@@ -104,17 +94,16 @@ const PostamatForm = (props) => {
             <div className="postamats-list__panel">
               <div className="container">
                 <div className="postamats-list__panel-wrapper">
-                  <div className="postamats-list__total">{`Выбрано ${chosenItems} постаматов`}</div>
+                  <div className="postamats-list__total">{`Выбрано ${selectedIds.length} постаматов`}</div>
                   <div className="postamats-list__buttons">
-                    <button type="button" onClick={() => changeHeatMap(formik.values)} className='button_form' disabled>Обновить карту</button>
-                    <button type="submit" className='button_form' disabled={formik.isSubmitting}>Постаматы (excel)</button>
-                    <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf || formik.isSubmitting}>Карта (pdf)</button>
+                    <button type="button" /* onClick={() => changeHeatMap(formik.values)} */ className='button_form' /* disabled */>Обновить карту</button>
+                    <button type="button" onClick={()=>handleSubmit(filters, selectedIds)}className='button_form' disabled={submitting}>Постаматы (excel)</button>
+                    <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf || submitting}>Карта (pdf)</button>
                   </div>
 
                 </div>
               </div>
-            </div>
-          </form>         
+            </div>        
         </>
 
    

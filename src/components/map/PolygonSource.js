@@ -23,8 +23,8 @@ const PolygonSource = ({id, purpose}) => {
                     type: 'Feature',
                     //custom propertie, helps with events
                     properties: {
-                        type: 'area',
-                        name: 'outline'
+                        type: 'polygon',
+                        name: 'outline-area'
                     },
                     geometry: {
                         type: 'Polygon',

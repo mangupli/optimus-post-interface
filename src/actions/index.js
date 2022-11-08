@@ -82,13 +82,6 @@ export const districtsFetched = (districts) => {
     }
 }
 
-/* export const updateActiveDistrict = (districts, districtId) => {
-    const district = districts.filter(district => district.id === districtId)[0];
-    return {
-        type: 'UPDATE_ACTIVE_DISTRICT',
-        payload: district
-    }
-} */
 
 export const areasLoading = () => {
     return {
@@ -131,30 +124,21 @@ export const postamatsFetched = (postamats) => {
     }
 }
 
-export const setOldPostamats = (postamats) => {
-    return {
-        type: 'SET_OLD_POSTAMATS',
-        payload: postamats
-    }
-}
-
-export const setNewPostamats = (postamats) => {
-    return {
-        type: 'SET_NEW_POSTAMATS',
-        payload: postamats
-    }
-}
-
-export const setChosenPostamats = (postamats) => {
-    return {
-        type: 'SET_CHOSEN_POSTAMATS',
-        payload: postamats
-    }
-}
-
 export const postamatsFetchingError = () => {
     return {
         type: 'POSTAMATS_FETCHING_ERROR'
+    }
+}
+
+export const resetPostamats = () => {
+    return {
+        type: 'RESET_POSTAMATS'
+    }
+}
+
+export const resetFilters = () => {
+    return {
+        type: 'RESET_FILTERS'
     }
 }
 
@@ -219,20 +203,39 @@ export const switchHeatmap = () => {
     return{
         type: 'SWITCH_HEATMAP',
     }
-
 }
 
-export const chooseIds = (values) => {
-    let chosenPostamats = [];
+export const getIdsFromFormValues = (values) => {
+    let selectedIds = [];
 
     for(let key in values){
         if(values[key] === true){
-            chosenPostamats.push(+key);
+            selectedIds.push(+key);
         }
     }
     return{
-        type: 'CHOOSE_IDS',
-        payload: chosenPostamats
+        type: 'GET_IDS_FROM_FORM_VALUES',
+        payload: selectedIds
     }
 
+}
+
+export const selectId = (id) =>{
+    return{
+        type: 'SELECT_ID',
+        payload: +id
+    }
+}
+
+export const deselectId = (id) =>{
+    return{
+        type: 'DESELECT_ID',
+        payload: +id
+    }
+}
+
+export const resetSelectedIds = () => {
+    return{
+        type: 'RESET_SELECTED_IDS'
+    }
 }

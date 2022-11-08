@@ -1,6 +1,9 @@
-import { useEffect, memo, useContext } from 'react';
+import { useEffect, memo, useContext, useCallback } from 'react';
 
 import { MapContext } from '../../contexts/MapContext';
+
+import { useDispatch } from 'react-redux';
+import {selectId, deselectId } from '../../actions'
 
 import { load } from '@2gis/mapgl';
 
@@ -15,7 +18,19 @@ export const MapGLComponent = (props) => {
     // eslint-disable-next-line
     const [_, setMapInstance] = useContext(MapContext);
 
+    const dispatch = useDispatch();
+
     const mapCenter = store.getState().mapCenter;
+
+    const onMarkerClick = useCallback((e) => {
+        if (e.targetData?.type === 'geojson'){
+            console.dir(e.targetData);
+            if(e.targetData.feature.properties.type === 'marker-postamat-predict'){
+                console.log(e.targetData.feature.properties.name);
+                dispatch(selectId(e.targetData.feature.properties.name));
+            }           
+        }
+    }, []);
 
     useEffect(() => {
         let map;
@@ -36,12 +51,16 @@ export const MapGLComponent = (props) => {
                 const { id } = e.target;
                 console.log('Идентификатор объекта: ' + id);
             });    
+
+            map.on('click', onMarkerClick);
             
             setMapInstance(map); 
         });
 
         // Удаляем карту при размонтировании компонента
-        return () => map && map.destroy();
+        return () => {
+            map && map.destroy()
+        };
         
 // eslint-disable-next-line
     }, []);

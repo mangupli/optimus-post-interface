@@ -7,7 +7,7 @@ import Select from 'react-select';
 
 import { methodOptions,sortOptions } from '../../constants';
 
-import {sumbitFilters, postamatsFetched, setOldPostamats, setNewPostamats} from '../../actions'
+import {sumbitFilters, resetFilters, resetPostamats, resetSelectedIds } from '../../actions'
 
 import './filtersForm.scss';
 
@@ -34,14 +34,14 @@ const FiltersForm = () => {
 		const districtId = option.value;
 		pickAndShowDistrict(districtId);
 		loadAreas(districtId);
-		setFieldValue("districtFilter", option);
 		setFieldValue("areaFilter", {value: 'all', label: 'Все районы'});
+		onFilterChange("districtFilter", option, setFieldValue);
 	}
 
 	const  onChangeAreaFilter = (option, setFieldValue) => {
 		const areaId = option.value;
 		pickAndShowArea(areaId);
-		setFieldValue("areaFilter", option);
+		onFilterChange("areaFilter", option, setFieldValue);
 	}
 
 /* 	console.log('render form'); */
@@ -53,10 +53,9 @@ const FiltersForm = () => {
 
 	const onFilterChange = (id, option, setFieldValue) => {
 		setFieldValue(id, option);
-		dispatch(sumbitFilters(undefined));
-		dispatch(postamatsFetched([]));
-		dispatch(setOldPostamats([]));
-		dispatch(setNewPostamats([]));
+		dispatch(resetFilters());
+		dispatch(resetPostamats());
+		dispatch(resetSelectedIds());
 	}
 
 	return(

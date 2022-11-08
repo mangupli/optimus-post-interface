@@ -4,11 +4,11 @@ import classNames from 'classnames';
 
 import store from '../../store';
 
-const PostamatCard = ({postamat, choosen}) => {
+const PostamatCard = ({postamat, selected}) => {
 	if(!postamat) return <h5>Карточка постамата, которого не существует</h5>
 
 	const cardClass = classNames('postamat-card', {
-		'postamat-card_active': choosen
+		'postamat-card_active': selected
 	});
 
 	const {id, district_id, area_name, address, distance_to_bus, distance_to_metro, predict_a, predict_b, predict_c, people_in_range, placement_object_type_id, is_placed} = postamat;

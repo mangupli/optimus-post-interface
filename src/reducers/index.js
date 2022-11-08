@@ -32,13 +32,13 @@ const initialState = {
 	postamatsLoadingStatus: 'idle',
 	oldPostamats: [],
 	newPostamats: [],
-	//chosenPostamats: [],
+	//selectedPostamats: [],
 
 	//heatmap
 	heatmap: false,
 
 	//form
-	chosenIds: []
+	selectedIds: []
 
 }
 
@@ -160,26 +160,33 @@ const reducer = (state = initialState, action) => {
 				...state,
 				postamatsLoadingStatus: 'loading'
 			}
+
 		case 'POSTAMATS_FETCHED':
-			return{
+			const postamats = action.payload;
+			let oldPostamats = [];
+			let newPostamats = [];
+			for(let postamat of postamats){
+				if (postamat.is_placed === true){
+					oldPostamats.push(postamat);
+				}
+				else {
+					newPostamats.push(postamat);
+				}
+			}
+			return {
 				...state,
 				postamatsLoadingStatus: 'idle',
-				postamats: action.payload
+				postamats,
+				oldPostamats,
+				newPostamats		
 			}
-		case 'SET_OLD_POSTAMATS':
+
+		case 'RESET_POSTAMATS':
 			return{
 				...state,
-				oldPostamats: action.payload
-			}
-		case 'SET_NEW_POSTAMATS':
-			return{
-				...state,
-				newPostamats: action.payload
-			}
-		case 'SET_CHOSEN_POSTAMATS':
-			return{
-				...state,
-				chosenPostamats: action.payload
+				oldPostamats: [],
+				newPostamats: [],
+				postamats: []			
 			}
 		case 'POSTAMATS_FETCHING_ERROR':
 			return{
@@ -191,18 +198,39 @@ const reducer = (state = initialState, action) => {
 				...state,
 				filters: action.payload
 			}
+		case 'RESET_FILTERS':
+			return{
+				...state,
+				filters: undefined
+			}
 		case 'SWITCH_HEATMAP':{
 			return {
 				...state,
 				heatmap: !state.heatmap,				
 			}
 		}
-		case 'CHOOSE_IDS':
+		case 'GET_IDS_FROM_FORM_VALUES':
 			return{
 				...state,
-				chosenIds: action.payload
+				selectedIds: action.payload
 			}
-			
+		case 'RESET_SELECTED_IDS':
+			return{
+				...state,
+				selectedIds: []
+			}
+		case 'SELECT_ID':
+			const moreSelectedIds = [...state.selectedIds, action.payload];
+			return{
+				...state,
+				selectedIds: moreSelectedIds
+			}
+		case 'DESELECT_ID':
+			const lessSelectedIds = state.selectedIds.filter(id => id != action.payload);
+			return{
+				...state,
+				selectedIds: lessSelectedIds
+			}			
 		default:{
 			return state;
 		}
