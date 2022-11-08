@@ -20,11 +20,10 @@ const LoginForm = () => {
         authenticate(values);
     };
 
-    const loginError = loginLoadingStatus === 'error' ? <div className=''>Неправильный логин/Пароль</div> : '';
+    const loginError = loginLoadingStatus === 'error' ? <div style={{color: '#F62E46'}}>Неправильный логин/Пароль</div> : '';
 
     return (
             <div className="login-form__container">
-                {loginError}
                 <Formik
                 initialValues={{
                     email: "",
@@ -36,6 +35,7 @@ const LoginForm = () => {
                 {() => {
                     return (
                     <Form className="login-form">
+                        {loginError}
                         <Input name="email" placeholder="Логин" />
                         <Input name="password" placeholder="Пароль" type="password"/>
                         <div className="">
