@@ -35,7 +35,7 @@ const PostamatForm = (props) => {
         html2canvas(element)
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF();
+                const pdf = new jsPDF('l', 'px', [2520, 1100]);
                 pdf.addImage(imgData, 'JPEG', 0, 0);
                 pdf.save("map.pdf");
             }).finally(() => setDisabledToPdf(false))
