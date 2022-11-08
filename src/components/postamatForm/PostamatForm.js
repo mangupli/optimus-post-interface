@@ -20,7 +20,6 @@ const PostamatForm = (props) => {
     const { exportPostamats } = useRequestService();
 
     const filters = useSelector(state => state.filters);
-
     const dispatch = useDispatch();
 
 
@@ -36,9 +35,7 @@ const PostamatForm = (props) => {
         html2canvas(element)
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF({
-                    orientation: "landscape"
-                });
+                const pdf = new jsPDF();
                 pdf.addImage(imgData, 'JPEG', 0, 0);
                 pdf.save("map.pdf");
             }).finally(() => setDisabledToPdf(false))
