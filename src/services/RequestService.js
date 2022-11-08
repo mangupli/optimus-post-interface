@@ -192,7 +192,7 @@ export const useRequestService = () => {
  */
 
         const headers = {
-            'Content-Type': 'application/octet-stream',
+            'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
         };
         
