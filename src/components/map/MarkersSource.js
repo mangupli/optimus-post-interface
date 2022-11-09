@@ -10,7 +10,8 @@ const MarkersSource = ({id, purpose}) => {
     const [ mapInstance ] = useMapContext();
 
     const postamats = useSelector(state => state.postamats);
-    const heatmap = useSelector(state => state.heatmap)
+    const selectedPostamats = useSelector(state => state.selectedPostamats)
+    const heatmap = useSelector(state => state.heatmap);
 
     const [source, setSource] = useState(null);
 
@@ -19,23 +20,38 @@ const MarkersSource = ({id, purpose}) => {
 
         let instance;
 
+        const allPostamatsFeatures = postamats.map(postamat => {
+            return { type: 'Feature',
+             //custom propertie, helps with events
+             properties: {
+                 type: postamat.is_placed ? 'marker-postamat-placed' : 'marker-postamat-predicted',
+                 label: postamat.id,
+                 name: postamat.id
+             },
+             geometry: {
+                 type: 'Point',
+                 coordinates: postamat.geo_data,
+             },}
+         })
+
+        const selectedPostamatsFeatures = selectedPostamats.map(postamat => {
+            return { type: 'Feature',
+             //custom propertie, helps with events
+             properties: {
+                 type: 'marker-postamat-selected',
+                 label: postamat.id,
+                 name: postamat.id
+             },
+             geometry: {
+                 type: 'Point',
+                 coordinates: postamat.geo_data,
+             },}
+         })
+
+
         const data = {
             type: 'FeatureCollection',
-            features: postamats.map(postamat => {
-                   const color = postamat.is_placed ? 'blue' : 'grey';
-                   return { type: 'Feature',
-                    //custom propertie, helps with events
-                    properties: {
-                        type: postamat.is_placed ? 'marker-postamat-placed' : 'marker-postamat-predict',
-                        label: postamat.id,
-                        color: color,
-                        name: postamat.id
-                    },
-                    geometry: {
-                        type: 'Point',
-                        coordinates: postamat.geo_data,
-                    },}
-                })
+            features: [...allPostamatsFeatures, ...selectedPostamatsFeatures]
         }
 
         load().then(mapglAPI => {
@@ -59,7 +75,7 @@ const MarkersSource = ({id, purpose}) => {
     }
     return undefined;
     // eslint-disable-next-line
-    }, [mapInstance, postamats]);
+    }, [mapInstance, postamats, selectedPostamats]);
 
 /*     return null; */
 
@@ -79,7 +95,7 @@ const Layer = (props) => {
 
     const {map, id, purpose, source, show} = props;
 
-    const [layer, setLayer] = useState({
+    const layer1 = {
         id: id, 
     
         filter: ['match', ['sourceAttr', 'purpose'], [purpose], true, false],
@@ -89,24 +105,56 @@ const Layer = (props) => {
     
         // Стиль объекта отрисовки
         style: {
-            iconImage: ['match', ['get', 'color'], ['blue'], 'ent_i', 'ent'],
+            iconImage: ['match', ['get', 'type'], ['marker-postamat-predicted'], 'ent', 'ent_i'],        
             iconWidth: 25,
             textField: ['get', 'label'],
             textFont: ['Noto_Sans'],
-            textColor: '#0098ea',
+            textColor: '#000000',
+/*             textColor: ['match', ['get', 'color'], ['blue'], '#0098ea','#FF0000'], */
             textHaloColor: '#fff',
             textHaloWidth: 1,
             iconPriority: 100,
             textPriority: 100,
         },
-    });
+    };
+
+    const layer2 = {
+        id: 'selected-postamats-layer', 
+    
+        filter: [
+            'all',
+            ['match', ['sourceAttr', 'purpose'], [purpose], true, false],
+            ['match', ['get', 'type'], ['marker-postamat-selected'], true, false],
+        ],
+
+/*         filter: ['match', ['sourceAttr', 'purpose'], [purpose], true, false], */
+    
+        // Тип объекта отрисовки
+        type: 'point',
+    
+        // Стиль объекта отрисовки
+        style: {
+            iconImage: 'ent',        
+            iconWidth: 40,
+            textField: ['get', 'label'],
+            textFont: ['Noto_Sans'],
+            textColor: '#FF0000',
+/*             textColor: ['match', ['get', 'color'], ['blue'], '#0098ea','#FF0000'], */
+            textHaloColor: '#fff',
+            textHaloWidth: 1,
+            iconPriority: 100,
+            textPriority: 100,
+        },
+    };
 
     useEffect(()=>{
      
         if(map/*  && source */){
-            map.addLayer(layer);
+            map.addLayer(layer1);
+            map.addLayer(layer2);
             return () => {
-                map.removeLayer(id);                  
+                map.removeLayer(id);       
+                map.removeLayer('selected-postamats-layer');            
             };
         }
         return undefined;

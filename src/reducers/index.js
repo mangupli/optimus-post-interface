@@ -32,7 +32,7 @@ const initialState = {
 	postamatsLoadingStatus: 'idle',
 	oldPostamats: [],
 	newPostamats: [],
-	//selectedPostamats: [],
+	selectedPostamats: [],
 
 	//heatmap
 	heatmap: false,
@@ -121,7 +121,6 @@ const reducer = (state = initialState, action) => {
 				...state,
 				districts,
 				districtOptions: [defaultOption, ...otherOptions],
-				activeDistrictFilter: defaultOption
 			}
 		case 'AREAS_LOADING': 
 			return {
@@ -217,19 +216,30 @@ const reducer = (state = initialState, action) => {
 		case 'RESET_SELECTED_IDS':
 			return{
 				...state,
-				selectedIds: []
+				selectedIds: [],
+				selectedPostamats: []
 			}
 		case 'SELECT_ID':
-			const moreSelectedIds = [...state.selectedIds, action.payload];
+			const selectedId = action.payload;
+			const alreadySelected = state.selectedIds.includes(selectedId);
+			const moreSelectedIds = alreadySelected ? state.selectedIds : [...state.selectedIds, selectedId];
+			let moreSelectedPostamats = state.selectedPostamats;
+			if(!alreadySelected){
+				const newPostamat = state.newPostamats.filter(postamat => postamat.id === selectedId)[0];
+				moreSelectedPostamats = [...state.selectedPostamats, newPostamat]
+			}
 			return{
 				...state,
-				selectedIds: moreSelectedIds
+				selectedPostamats: moreSelectedPostamats,
+				selectedIds: moreSelectedIds				
 			}
 		case 'DESELECT_ID':
 			const lessSelectedIds = state.selectedIds.filter(id => id != action.payload);
+			const lessSelectedPostamats = state.selectedPostamats.filter(postamat => postamat.id != action.payload);
 			return{
 				...state,
-				selectedIds: lessSelectedIds
+				selectedIds: lessSelectedIds,
+				selectedPostamats: lessSelectedPostamats
 			}			
 		default:{
 			return state;

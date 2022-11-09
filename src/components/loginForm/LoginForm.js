@@ -40,7 +40,7 @@ const LoginForm = () => {
                         <Input name="password" placeholder="Пароль" type="password"/>
                         <div className="">
                             <button
-                                className="button_form button_form_big"
+                                className="button_form button_form_big login-form__button"
                                 type="submit"
                             >
                                 Войти
@@ -77,7 +77,7 @@ return (
     <ErrorMessage
         name={field.name}
         component="div"
-        className=""
+        style={{marginTop: '5px', color: '#F62E46'}}
     />
     </div>
 );

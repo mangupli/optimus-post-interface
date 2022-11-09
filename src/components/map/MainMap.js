@@ -1,5 +1,5 @@
 import { useState, memo } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, useCallback } from 'react-redux';
 import classNames from 'classnames';
 
 import MapGL from "./MapGL";
@@ -10,7 +10,7 @@ import MarkersSource from "./MarkersSource";
 import ClustererBase from './Clusterer';
 import RouteSource from "./RouteSource";
 
-import { switchHeatmap } from '../../actions'
+import { switchHeatmap } from '../../actions';
 
 import "./mainMap.scss"
 
@@ -52,12 +52,14 @@ const MainMapComponent = (props) => {
                         <input type="checkbox" onClick={()=>dispatch(switchHeatmap())} defaultChecked={heatmap}/>
                         <span className="slider"></span>
                         <span className="labels" data-on="Тепловая" data-off="Обычная"></span>
-                    </label>
+                    </label>                   
+
                     <div onClick={rollMap} className="map__roll-up">
                         <i className="icon-arrowDown"></i>
                     </div>
                 </div>
-                <div className="little_text">*Серым цветом обозначены рекомендованые постаматы, голубым — поставленные.<br/> На тепловой изначально отображаются только поставленные постаматы. Планируется добавить возможность обновлять тепловую карту с выбранными постаматами ниже.</div>
+                <div className="little_text">*Серым цветом обозначены рекомендованые постаматы, голубым — поставленные.
+                <br/>**Бордовым цветом отображаются самые популярные пешие маршруты района Замоскворечье</div>
                 
             </div>
         </div>

@@ -164,32 +164,12 @@ export const useRequestService = () => {
 
     } , [])
 
-    const exportPostamats = (filters, values) => {
-
-        let selectedPostamats = [];
-
-        for(let key in values){
-            if(values[key]){
-                selectedPostamats.push(+key);
-            }
-        }
+    const exportPostamats = (filters, ids) => {
 
         const body = {
-                ids: selectedPostamats,
+                ids,
                 ...filters    
             }
-
-//for tests
-/* 
-        const body = {
-            "ids": [],
-            "area_id": 1,
-            "district_id": 7,
-            "placement_object_type_id": 3,
-            "is_placed": true,
-            "sort": "-distance_to_metro,distance_to_bus,+predict_a"
-            }
- */
 
         const headers = {
             'Content-Type': 'application/json',

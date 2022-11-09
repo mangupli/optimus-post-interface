@@ -25,7 +25,7 @@ const Header = () => {
                         <div className="logo__img"></div>
                         <h1 className="logo__title">Московский постамат</h1>                    
                     </Link>
-                    {user ? <button className='button_form button_form_xs' onClick={onLogout}>Выйти</button> : null}
+                    {user ? <div className='text_bold text_color_accent header__logout' onClick={onLogout}>Выйти</div> : null}
                 </div>
             </div>      
         </header>

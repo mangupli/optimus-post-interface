@@ -107,19 +107,7 @@ const FiltersForm = () => {
 										options={areaOptions}
 										onBlur={handleBlur}
 									/> 
-								</div>
-
-								<div className="filters__item">
-									<div className='filters__label'>Сортировать по</div>
-									<Select
-										placeholder={'Выбрать'}
-										id="sortFilter"
-										value={values.sortFilter}
-										onChange={option => onFilterChange("sortFilter", option, setFieldValue)}
-										options={sortOptions}
-										onBlur={handleBlur}
-									/>
-								</div>
+								</div>								
 								<div className="filters__item">
 									<div className='filters__label'>Локация</div>
 									<Select
@@ -140,6 +128,17 @@ const FiltersForm = () => {
 									onChange={option => onFilterChange("methodFilter", option, setFieldValue)}
 									options={methodOptions}
 									onBlur={handleBlur}
+									/>
+								</div>
+								<div className="filters__item">
+									<div className='filters__label'>Сортировать по</div>
+									<Select
+										placeholder={'Выбрать'}
+										id="sortFilter"
+										value={values.sortFilter}
+										onChange={option => onFilterChange("sortFilter", option, setFieldValue)}
+										options={sortOptions}
+										onBlur={handleBlur}
 									/>
 								</div>
 								<button type="submit" className="button button_xs postamats__button">Показать</button>

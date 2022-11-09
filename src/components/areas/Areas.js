@@ -10,7 +10,7 @@ const Areas = () => {
     const activeDistrictId = useSelector(state => state.activeDistrictId);
     if (!activeDistrictId || activeDistrictId==="all"){
         return (
-            <h3 className="text_bold" style={{textAlign: "center"}}>Выберите округ</h3>
+            <h3 className="text_bold" style={{textAlign: "center"}}>Выберите округ для отображения районов</h3>
         );
     }
     return (

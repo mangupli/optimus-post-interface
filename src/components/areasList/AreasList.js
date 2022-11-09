@@ -71,7 +71,7 @@ const View = ({areas, onClick}) => {
 					<div className="area__results">
 							<div className="area__result">
 								<div className="text">
-									Постаматов
+									Установленные постаматы
 								</div>
 								<div className="text_bold">
 									{post_office.placed}
@@ -87,7 +87,7 @@ const View = ({areas, onClick}) => {
 							</div>} */}
 							<div className="area__result">
 								<div className="text">
-									Мест свободно
+									Рекомендованные постаматы
 								</div>
 								<div className="text_bold">
 								{post_office.not_placed}

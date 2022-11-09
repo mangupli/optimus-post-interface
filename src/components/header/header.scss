@@ -20,7 +20,11 @@ header{
         justify-self: start;
         display: flex;
         margin-left: 50px; 
-    }   
+    }
+    
+    &__logout{
+        cursor: pointer;
+    }
 }
 
 .logo{

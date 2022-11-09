@@ -18,19 +18,21 @@ export const MapGLComponent = (props) => {
     // eslint-disable-next-line
     const [_, setMapInstance] = useContext(MapContext);
 
+    const mapCenter = store.getState().mapCenter;
+
     const dispatch = useDispatch();
 
-    const mapCenter = store.getState().mapCenter;
 
     const onMarkerClick = useCallback((e) => {
         if (e.targetData?.type === 'geojson'){
             console.dir(e.targetData);
-            if(e.targetData.feature.properties.type === 'marker-postamat-predict'){
+            if(e.targetData.feature.properties.type === 'marker-postamat-predicted'){
                 console.log(e.targetData.feature.properties.name);
                 dispatch(selectId(e.targetData.feature.properties.name));
             }           
         }
     }, []);
+
 
     useEffect(() => {
         let map;

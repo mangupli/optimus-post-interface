@@ -1,11 +1,10 @@
 import { useEffect,  useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import { useMapContext } from '../../contexts/MapContext';
 
 import { load } from '@2gis/mapgl';
 
-import { routesCoords } from '../../constants';
+import { topRoutesCoords, middleRoutesCoords } from '../../constants';
 
 const RouteSource = ({id, purpose}) => {
 
@@ -14,27 +13,40 @@ const RouteSource = ({id, purpose}) => {
     const [source, setSource] = useState(null);
 
     useEffect(() => {
-    if (mapInstance && routesCoords) {
+    if (mapInstance) {
 
         let instance;
 
+        const topFeatures = topRoutesCoords.map(coord => (
+            { type: 'Feature',
+             //custom propertie, helps with events
+             properties: {
+                 type: 'top-route'
+             },
+             geometry: {
+                 type: 'LineString',
+                 coordinates: coord,
+             }
+         }
+        ));
+
+        const middleFeatures = middleRoutesCoords.map(coord => (
+            { type: 'Feature',
+             //custom propertie, helps with events
+             properties: {
+                 type: 'middle-route'
+             },
+             geometry: {
+                 type: 'LineString',
+                 coordinates: coord,
+             }
+         }
+        ));
+
         const data = {
             type: 'FeatureCollection',
-            features: routesCoords.map(coord => (
-                   { type: 'Feature',
-                    //custom propertie, helps with events
-                    properties: {
-                        type: 'route',
-                        name: 'the busiest route'
-                    },
-                    geometry: {
-                        type: 'LineString',
-                        coordinates: coord,
-                    }
-                }
-            ))                
+            features: [...topFeatures, ...middleFeatures]            
         }
-
 
         load().then(mapglAPI => {
 
@@ -55,7 +67,7 @@ const RouteSource = ({id, purpose}) => {
     }
     return undefined;
     // eslint-disable-next-line
-    }, [mapInstance, routesCoords]);
+    }, [mapInstance]);
 
 /*     return null; */
 
@@ -67,35 +79,29 @@ const RouteSource = ({id, purpose}) => {
             source={source}
             />
         )
-
 }
 
 const Layer = (props) => {
 
     const {map, id, purpose, source} = props;
 
-    const [layer, setLayer] = useState({
+    const layer = {
         id: id, 
     
         filter: ['match', ['sourceAttr', 'purpose'], 
         [purpose], true, false],
-/*         filter: [
-            'all',
-            ['match', ['sourceAttr', 'purpose'], [purpose], true, false],
-            ['match', ['get', 'type'], ['route'], true, false],
-        ], */
     
         // Тип объекта отрисовки
         type: 'dashedLine',
     
         // Стиль объекта отрисовки
         style: {
-            color: '#8B008B',
+            color: ['match', ['get', 'type'], ['top-route'], '#B22222', '#DB7093'],
             width: 5,
             dashLength: 10,
             gapLength: 5,
         },
-    });
+    };
 
     useEffect(()=>{
 

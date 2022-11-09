@@ -5,21 +5,23 @@ import { useMapContext } from '../../contexts/MapContext';
 
 import { load } from '@2gis/mapgl';
 
-import store from '../../store';
-
 const HeatMapSource = ({id, purpose}) => {
 
     const [ mapInstance ] = useMapContext();
 
-    const postamats = useSelector(state => state.oldPostamats);
+    const oldPostamats = useSelector(state => state.oldPostamats);
+    const selectedPostamats = useSelector(state => state.selectedPostamats);
     const heatmap = useSelector(state => state.heatmap);
 
     const [source, setSource] = useState(null);
+/* 
+    console.log(postamats); */
 
     useEffect(() => {
-    if (mapInstance && postamats) {
+    if (mapInstance && (oldPostamats.length > 0 || selectedPostamats.length > 0)) {
 
         let instance;
+        const postamats = [...oldPostamats, ...selectedPostamats];
 
         const data = {
             type: 'FeatureCollection',
@@ -56,9 +58,8 @@ const HeatMapSource = ({id, purpose}) => {
         };
     }
     return undefined;
-    }, [mapInstance, postamats]);
+    }, [mapInstance, oldPostamats, selectedPostamats]);
     
-
         return( 
         <Layer
             map={mapInstance}
@@ -68,14 +69,13 @@ const HeatMapSource = ({id, purpose}) => {
             show={heatmap}
             />
         )
-
 }
 
 const Layer = (props) => {
 
     const {map, id, purpose, source, show} = props;
 
-    const [layer, setLayer] = useState({
+    const layer = {
         id: id, 
     
         filter: ['match', ['sourceAttr', 'purpose'], [purpose], true, false],
@@ -108,7 +108,7 @@ const Layer = (props) => {
             opacity: 0.8,
             downscale: 1,
         },
-    });
+    };
 
     useEffect(()=>{
      

@@ -10,7 +10,6 @@ const PostamatsPage = () => {
               <MainMap /> 
             </div>
               <Postamats/>
-
       </>
 
     );

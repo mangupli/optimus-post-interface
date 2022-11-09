@@ -1,7 +1,7 @@
 import { useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getIdsFromFormValues, selectId, deselectId, resetSelectedIds } from '../../actions';
+import { selectId, deselectId, resetSelectedIds } from '../../actions';
 
 import { useRequestService } from '../../services/RequestService';
 
@@ -13,7 +13,6 @@ const PostamatForm = (props) => {
 
     const {postamats} = props;
 
-  
     const [disabledToPdf, setDisabledToPdf] = useState(false);
 
     const [submitting, setSubmitting] = useState(false);
@@ -40,17 +39,14 @@ const PostamatForm = (props) => {
 
     const handleSubmit = (filters, ids) => {
         setSubmitting(true)
-/*         exportPostamats(filters, ids); */
-        console.log('export postamats need to do');
-        console.log(filters);
-        console.log(ids);
+        exportPostamats(filters, ids);
         setSubmitting(false)
     }
 
-/* 
-      const changeHeatMap = (values) => {
-        dispatch(getIdsFromFormValues(values));
-      } */
+    const resetForm = () => {
+      dispatch(resetSelectedIds());
+    }
+
 
       const changeField = (e) => {
         if(e.target.checked){
@@ -95,10 +91,11 @@ const PostamatForm = (props) => {
                 <div className="postamats-list__panel-wrapper">
                   <div className="postamats-list__total">{`Выбрано ${selectedIds.length} постаматов`}</div>
                   <div className="postamats-list__buttons">
-                    <button type="button" /* onClick={() => changeHeatMap(formik.values)} */ className='button_form' /* disabled */>Обновить карту</button>
                     <button type="button" onClick={()=>handleSubmit(filters, selectedIds)}className='button_form' disabled={submitting}>Постаматы (excel)</button>
                     <button type="button" className='button_form' onClick={toPdf} disabled={disabledToPdf || submitting}>Карта (pdf)</button>
                   </div>
+
+                  <button type="button" className='button button_xxs postamats-list__reset' onClick={resetForm}><span>&#215;&nbsp;</span>Сбросить</button>
 
                 </div>
               </div>
