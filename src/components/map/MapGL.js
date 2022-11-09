@@ -41,7 +41,7 @@ export const MapGLComponent = (props) => {
             map = new mapglAPI.Map('map-container', {
                 center: mapCenter,
                 zoom: 11,
-                key: 'a21a56b9-9f9b-4092-b8a5-b281a67a958a',
+                key: '03ffb8f5-9563-46df-8a4c-28ceca56ebb7',
                 zoomControl: 'bottomLeft',
                 preserveDrawingBuffer: true
             });
