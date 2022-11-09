@@ -25,9 +25,9 @@ export const MapGLComponent = (props) => {
 
     const onMarkerClick = useCallback((e) => {
         if (e.targetData?.type === 'geojson'){
-            console.dir(e.targetData);
+/*             console.dir(e.targetData); */
             if(e.targetData.feature.properties.type === 'marker-postamat-predicted'){
-                console.log(e.targetData.feature.properties.name);
+/*                 console.log(e.targetData.feature.properties.name); */
                 dispatch(selectId(e.targetData.feature.properties.name));
             }           
         }
@@ -67,7 +67,7 @@ export const MapGLComponent = (props) => {
 // eslint-disable-next-line
     }, []);
 
-    console.log('render Map');
+/*     console.log('render Map'); */
 
     return (
         <>

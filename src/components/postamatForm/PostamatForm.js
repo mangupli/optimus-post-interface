@@ -55,7 +55,7 @@ const PostamatForm = (props) => {
         else {
           dispatch(deselectId(e.target.id));
         }
-        console.log(e.target);
+/*         console.log(e.target); */
       }
 
       const items = postamats.map(postamat => {

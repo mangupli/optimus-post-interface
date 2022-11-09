@@ -4,7 +4,7 @@ import { useMapContext } from "../contexts/MapContext";
 
 import { cityCenter } from '../constants';
 
-import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, sumbitFilters,loginError, loginLoading, loginSuccess, districtsFetched } from '../actions/';
+import { activeDistrictChanged, activeAreaChanged,updateActiveDistrictInfo, updateMapCenter, updateRenderedPolygon,  areasLoading, areasFetched, areasFetchingError, updateActiveAreaInfo, setLocationOptions, postamatsFetched, postamatsLoading, postamatsFetchingError, loginError, loginLoading, loginSuccess, districtsFetched } from '../actions/';
 import { useCallback } from 'react';
 
 export const useRequestService = () => {
