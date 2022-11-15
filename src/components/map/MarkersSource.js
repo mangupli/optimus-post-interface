@@ -107,14 +107,14 @@ const Layer = (props) => {
         style: {
             iconImage: ['match', ['get', 'type'], ['marker-postamat-predicted'], 'ent', 'ent_i'],        
             iconWidth: 25,
-            textField: ['get', 'label'],
+/*          textField: ['get', 'label'],
             textFont: ['Noto_Sans'],
             textColor: '#000000',
-/*             textColor: ['match', ['get', 'color'], ['blue'], '#0098ea','#FF0000'], */
+            textColor: ['match', ['get', 'color'], ['blue'], '#0098ea','#FF0000'],
             textHaloColor: '#fff',
             textHaloWidth: 1,
             iconPriority: 100,
-            textPriority: 100,
+            textPriority: 100, */
         },
     };
 
@@ -138,8 +138,9 @@ const Layer = (props) => {
             iconWidth: 40,
             textField: ['get', 'label'],
             textFont: ['Noto_Sans'],
-            textColor: '#FF0000',
+            textColor: '#0195eb',
 /*             textColor: ['match', ['get', 'color'], ['blue'], '#0098ea','#FF0000'], */
+            textFontSize: 14,
             textHaloColor: '#fff',
             textHaloWidth: 1,
             iconPriority: 100,

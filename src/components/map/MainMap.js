@@ -14,6 +14,7 @@ import { switchHeatmap } from '../../actions';
 
 import "./mainMap.scss"
 
+
 const MainMapComponent = (props) => {
 
     const [hidden, setHidden] = useState(false);
@@ -48,23 +49,68 @@ const MainMapComponent = (props) => {
                 </MapGL>
                 <div className="map__control">
                     <div className="text_bold text_color_white map__title">Карта</div>
-                    <label className="toggle">
-                        <input type="checkbox" onClick={()=>dispatch(switchHeatmap())} defaultChecked={heatmap}/>
-                        <span className="slider"></span>
-                        <span className="labels" data-on="Тепловая" data-off="Обычная"></span>
-                    </label>                   
+
+                    <span className="switcher" onClick={()=>dispatch(switchHeatmap())}>
+                        <input type="checkbox" id="switcher" defaultChecked={!heatmap}></input>
+                        <label for="switcher"></label>
+                    </span>
+           
 
                     <div onClick={rollMap} className="map__roll-up">
                         <i className="icon-arrowDown"></i>
                     </div>
                 </div>
-                <div className="little_text">*Серым цветом обозначены рекомендованые постаматы, голубым — поставленные.
-                <br/>**Бордовым цветом отображаются самые популярные пешие маршруты района Замоскворечье</div>
+
+                <MapLegend heatmap={heatmap} />           
                 
             </div>
         </div>
     )}
 
+    const MapLegend = ({heatmap}) => {
+        if(heatmap){
+            return  <div className="map__legend map__legend_heatmap">
+                <div className="text_legend">минимально</div>
+                <div className="map__gradient">
+                    <div className="map__gradient-item map__gradient-item"></div>
+                    <div className="map__gradient-item"></div>
+                    <div className="map__gradient-item"></div>
+                    <div className="map__gradient-item"></div>
+                    <div className="map__gradient-item"></div>
+                </div>
+                <div className="text_legend">максимально</div>
+            </div>
+        }
+        else{
+            return (
+                <div className="map__legend text_legend">
+                    <div className="map__legend-item">
+                        <span className="map__legend-icon map__legend-icon_fact"></span>
+                        — поставленные 
+                    </div>
+                    <div className="map__legend-item">
+                        <span className="map__legend-icon map__legend-icon_predict"></span>
+                        — рекомендованные постаматы 
+                    </div>
+                    <div className="map__legend-item">
+                        <span className="map__legend-icon map__legend-icon_station">
+                            <i className="icon-crown"></i>   
+                        </span>
+                        — остановки общественного транспорта
+                    </div>
+                    <div className="map__legend-item">
+                        <span className="map__legend-icon map__legend-icon_route"></span>
+                        — популярные пешие маршруты 
+                    </div>
+                </div> 
+            )
+        } 
+    }
+
 const MainMap = memo(MainMapComponent);
 
 export default MainMap;
+
+
+
+

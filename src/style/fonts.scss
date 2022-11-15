@@ -1,63 +1,71 @@
-  @font-face {
-    font-family: 'iconFont';
-    src:  url('../assets/fonts/iconFont.eot?ac9v2o');
-    src:  url('../assets/fonts/iconFont.eot?ac9v2o#iefix') format('embedded-opentype'),
-      url('../assets/fonts/iconFont.ttf?ac9v2o') format('truetype'),
-      url('../assets/fonts/iconFont.woff?ac9v2o') format('woff'),
-      url('../assets/fonts/iconFont.svg?ac9v2o#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-  }
-  
-  [class^="icon-"], [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'iconFont' !important;
-    speak: never;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-  
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .icon-metro:before {
-    content: "\e906";
-    color: #ff0013;
-  }
-  .icon-bus .icon-path1:before {
-    content: "\e902";
-    color: rgb(42, 92, 220);
-  }
-  .icon-bus .icon-path2:before {
-    content: "\e903";
-    margin-left: -1em;
-    color: rgb(255, 255, 255);
-  }
-  .icon-location .path1:before {
-    content: "\e904";
-    color: rgb(240, 128, 44);
-  }
-  .icon-location .path2:before {
-    content: "\e905";
-    margin-left: -1em;
-    color: rgb(255, 255, 255);
-  }
-  .icon-arrowDown:before {
-    content: "\e901";
-    color: #fff;
-    font-size: 9px;
-  }
-  .icon-buffer:before {
-    content: "\e900";
-    color: #2A5CDC;
-  }
-  .icon-compass2:before {
-    content: "\e94a";
-    color: #2A5CDC;
+@font-face {
+  font-family: 'iconFont';
+  src:  url('../assets/fonts/iconFont.eot?gpfqog');
+  src:  url('../assets/fonts/iconFont.eot?gpfqog#iefix') format('embedded-opentype'),
+    url('../assets/fonts/iconFont.ttf?gpfqog') format('truetype'),
+    url('../assets/fonts/iconFont.woff?gpfqog') format('woff'),
+    url('../assets/fonts/iconFont.svg?gpfqog#iconFont') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
 
-  }
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'iconFont' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-metro:before {
+  content: "\e906";
+  color: #ff0013;
+}
+.icon-bus .icon-path1:before {
+  content: "\e902";
+  color: rgb(42, 92, 220);
+}
+.icon-bus .icon-path2:before {
+  content: "\e903";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-location .path1:before {
+  content: "\e904";
+  color: rgb(240, 128, 44);
+}
+.icon-location .path2:before {
+  content: "\e905";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-crown:before {
+  content: "\e907";
+  color: #087df1;
+  font-size: 12px;
+}
+.icon-arrowDown:before {
+  content: "\e901";
+  color: #fff;
+  font-size: 9px;
+}
+.icon-buffer:before {
+  content: "\e900";
+  color: #2A5CDC;
+}
+.icon-compass2:before {
+  content: "\e94a";
+  color: #2A5CDC;
+}
+
+.icon-radio-unchecked:before {
+  content: "\ea56";
+}

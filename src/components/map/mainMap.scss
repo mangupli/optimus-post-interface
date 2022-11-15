@@ -29,103 +29,152 @@
     &__roll-up{
         cursor: pointer;
     }
+    &__legend{
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      &_heatmap{
+        width: 440px;
+      }
+      &-item{
+        display: flex;
+      }
+      &-icon{
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        margin-right: 8px;
+        &_predict{
+          background: #9A8E82;
+        }
+        &_fact{
+          background: #0195EB;
+        }
+        &_station{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background:white;
+          border-radius: 100%;
+          border: 2px solid #0195EB;
+          i{
+            line-height: 0;
+          }
+        }
+        &_route{
+          display: block;
+          width: 5px;
+          height: 20px;
+          background: #DB7093;
+          border-radius: 0;
+        }
+      }
+    }
+    &__gradient{
+      &-item{
+        width: 40px;
+        height: 20px;
+        background: yellow;
+        border-radius: 3px;
+        &:first-child{
+          background: #AC2078;
+        }
+        &:nth-child(2){
+          background: #FF9A00;
+        }
+        &:nth-child(3){
+          background: #FFFC00;
+        }   
+        &:nth-child(4){
+          background: #FFFC3F;
+        }           
+        &:last-child{
+          background: #FFFFFF;
+          border: 1px solid #000000;
+        }
+      }
+      display: flex;
+      gap: 5px;
+    }
 }
 
-.little_text{
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  color: #333333;
-}
-
-
-.toggle {
-    --width: 126px;
-    --height: 41px;
-
+  span.switcher {
     position: relative;
-    display: inline-block;
-    width: var(--width);
-    height: var(--height);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    border-radius: var(--height);
-    cursor: pointer;
-  }
+    
+    width:248px;
+    height:42px;
+    border-radius:25px;
+    margin:20px 0;
+    input {
+       appearance: none;    
+       position: relative;
+       width:248px;
+       height:42px;
+       border-radius:34px;
+       background-color:#FFFFFF;
+       outline:none;
+       transition:.25s -.1s;
+       &:before, &:after {
+          z-index:2;
+          position: absolute;
+          top:50%;
+          transform:translateY(-50%);
+          color:#FFFFFF;
+          font-weight: 400;
+          font-size: 16px;
+       }
+       &:before {
+          content: 'Обычная';
+          left:25px;
+       }
+       &:after {
+          content: 'Тепловая';
+          right:25px;
+       }
 
-  .toggle input {
-    display: none;
-  }
+       &:checked {
+        &:before {
+           color:#FFFFFF;
+           transition: color .5s .2s;
+        }
+        &:after {
+           color:#000000;
+           transition: color .5s;
+        }
+        &+label {
+           left:0;
+           right:120px;         
+           transition: left .5s, right .4s .2s;
+        }
+     }
+     &:not(:checked) {
+/*         background:black; */
+        transition: background .5s -.1s;
+        &:before {
+            color:#000000;
+           transition: color .5s;
+        }
+        &:after {
+           color:#FFFFFF;
+           transition: color .5s .2s;
+        }
+        &+label {
+           left:120px;
+           right:0;
+           transition: left .4s .2s, right .5s, background .35s -.1s;
+        }
+     }
+    }
+    label {
+       z-index:1;
+       position: absolute;
+       top:0;
+       bottom:0;
+       background: var(--main-color);
+       
+       border-radius:34px;
 
-  .toggle .slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: var(--height);
-    background-color: #ccc;
-    transition: all 0.4s ease-in-out;
-  }
+    }
 
-  .toggle .slider::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(var(--height));
-    height: calc(var(--height));
-    border-radius: calc(var(--height) / 2);
-
-    background-color: #fff;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s ease-in-out;
-  }
-
-  .toggle input:checked+.slider {
-    background-color: var(--main-color);
-  }
-
-  .toggle input:checked+.slider::before {
-    transform: translateX(calc(var(--width) - var(--height)));
-  }
-
-  .toggle .labels {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-weight: 400;
-    font-size: 16px;
-    font-family: sans-serif;
-    transition: all 0.4s ease-in-out;
-  }
-
-  .toggle .labels::after {
-    content: attr(data-off);
-    position: absolute;
-    right: 5px;
-    color: #4d4d4d;
-    opacity: 1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease-in-out;
-  }
-
-  .toggle .labels::before {
-    content: attr(data-on);
-    position: absolute;
-    left: 5px;
-    color: #ffffff;
-    opacity: 0;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
-    transition: all 0.4s ease-in-out;
-  }
-
-  .toggle input:checked~.labels::after {
-    opacity: 0;
-  }
-
-  .toggle input:checked~.labels::before {
-    opacity: 1;
-  }
-
+ }
+  
