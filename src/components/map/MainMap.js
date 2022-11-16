@@ -1,5 +1,5 @@
 import { useState, memo } from "react";
-import { useDispatch, useSelector, useCallback } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import MapGL from "./MapGL";
@@ -50,9 +50,9 @@ const MainMapComponent = (props) => {
                 <div className="map__control">
                     <div className="text_bold text_color_white map__title">Карта</div>
 
-                    <span className="switcher" onClick={()=>dispatch(switchHeatmap())}>
-                        <input type="checkbox" id="switcher" defaultChecked={!heatmap}></input>
-                        <label for="switcher"></label>
+                    <span className="switcher">
+                        <input type="checkbox" id="switcher" defaultChecked={!heatmap} onChange={()=>dispatch(switchHeatmap())}></input>
+                        <label htmlFor="switcher"></label>
                     </span>
            
 
